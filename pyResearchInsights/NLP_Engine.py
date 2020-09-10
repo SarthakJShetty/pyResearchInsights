@@ -24,7 +24,7 @@ import gensim.corpora as corpora
 from gensim.utils import simple_preprocess
 from gensim.models import CoherenceModel
 from common_functions import status_logger
-from Visualizer import visualizer_main
+from pyResearchInsights.Visualizer import visualizer_main
 '''Industrial level toolkit for NLP'''
 import spacy
 

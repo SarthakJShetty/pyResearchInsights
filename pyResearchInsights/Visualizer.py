@@ -7,7 +7,7 @@ Check out the repository README.md for a high-level overview of the project and 
 
 Sarthak J. Shetty
 24/11/2018'''
-from common_functions import status_logger
+from pyResearchInsights.common_functions import status_logger
 '''import matplotlib as plt'''
 import matplotlib.pyplot as plt
 '''Library necessary to develop the html visualizations'''

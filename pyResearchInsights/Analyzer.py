@@ -12,7 +12,7 @@ Sarthak J. Shetty
 '''Importing OS here to split the filename at the extension'''
 import os
 '''Importing status_logger here to log the details of the process run.'''
-from common_functions import status_logger
+from pyResearchInsights.common_functions import status_logger
 '''Importing the collections which contains the Counter function'''
 from collections import Counter
 '''Importing pandas here to build the dataframe'''

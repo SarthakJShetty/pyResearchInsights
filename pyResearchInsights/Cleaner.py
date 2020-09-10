@@ -8,7 +8,7 @@ Purpose of this script:
 Clean the corpus of special character'''
 
 '''Importing the status logger function here to LOG the cleaner module working for debugging'''
-from common_functions import status_logger
+from pyResearchInsights.common_functions import status_logger
 
 '''This holds the elements of the abstract after it has been split at the spaces'''
 elements = []

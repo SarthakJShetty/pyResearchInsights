@@ -25,7 +25,7 @@ import numpy as np
 '''This library is imported to check if we can feasibly introduce delays into the processor loop to reduce instances of the remote server, shutting the connection while scrapping extraordinarily large datasets.'''
 import time
 '''Fragmenting code into different scripts. Some functions are to be used across the different sub-parts as well. Hence, shifted some of the functions to the new script.'''
-from common_functions import pre_processing, status_logger
+from pyResearchInsights.common_functions import pre_processing, status_logger
 
 def url_reader(url, status_logger_name):
 	'''This keyword is supplied to the URL and is hence used for souping.
