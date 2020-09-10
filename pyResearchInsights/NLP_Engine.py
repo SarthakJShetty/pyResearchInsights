@@ -23,7 +23,7 @@ import gensim
 import gensim.corpora as corpora
 from gensim.utils import simple_preprocess
 from gensim.models import CoherenceModel
-from common_functions import status_logger
+from pyResearchInsights.common_functions import status_logger
 from pyResearchInsights.Visualizer import visualizer_main
 '''Industrial level toolkit for NLP'''
 import spacy
