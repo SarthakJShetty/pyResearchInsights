@@ -16,7 +16,7 @@ This script has been renamed as the system_functions.py to carry out OS level in
 '''Importing OS to call the tar function to generate the .tar file.'''
 import os
 '''From common_functions.py calling the status_logger() function to LOG the tarballing process and others as they are added here.'''
-from common_functions import status_logger
+from pyResearchInsights.common_functions import status_logger
 
 def rm_original_folder(logs_folder_name, status_logger_name):
 	'''This function deletes the logs folder generated once the .tar.gz file has been created.'''
