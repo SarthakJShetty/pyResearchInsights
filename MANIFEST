@@ -9,5 +9,4 @@ pyResearchInsights/Scraper.py
 pyResearchInsights/Visualizer.py
 pyResearchInsights/__init__.py
 pyResearchInsights/common_functions.py
-pyResearchInsights/hello.py
 pyResearchInsights/system_functions.py
