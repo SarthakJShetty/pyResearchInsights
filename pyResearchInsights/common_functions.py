@@ -104,7 +104,7 @@ def arguments_parser():
 
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--keywords", help="Keyword to search on Springer", default="Tiger")
-	parser.add_argument("--trends", help="Keywords to generate the trends histogram for", default="Tiger")
+	parser.add_argument("--trends", help="Keywords to generate the trends histogram for", default="Conservation")
 	parser.add_argument("--paper", help="If papers have to be downloaded as well", default="No")
 
 	arguments = parser.parse_args()

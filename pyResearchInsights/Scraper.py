@@ -73,7 +73,7 @@ def url_generator(start_url, query_string, status_logger_name):
 	'''We generate the urls_to_scrape from the stripped down determiner element'''
 	urls_to_scrape = [(start_url+str(counter)+"?facet-content-type=\"Article\"&query="+query_string+"&facet-language=\"En\"") for counter in range(1, (int(determiner.replace(',', '')) + 1))]
 	
-	url_generator_stop_status_key = determiner.replace(',', '') + " URLs have been obtained"
+	url_generator_stop_status_key = determiner.replace(',', '') + " page URLs have been obtained"
 	status_logger(status_logger_name, url_generator_stop_status_key)
 
 	return urls_to_scrape
@@ -365,7 +365,7 @@ def processor(abstract_url, urls_to_scrape, abstract_id_log_name, abstracts_log_
 	visualizer code to generate the trends histogram.'''
 	permanent_word_sorter_list = word_sorter_list_generator(status_logger_name)
 
-	for site_url_index in range(0, (len(urls_to_scrape)+1)):
+	for site_url_index in range(0, len(urls_to_scrape)):
 		print(urls_to_scrape[site_url_index])
 		if(site_url_index==0):
 			results_determiner(urls_to_scrape[site_url_index], status_logger_name)

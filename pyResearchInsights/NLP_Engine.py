@@ -42,13 +42,8 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 from nltk.corpus import stopwords
 stop_words = stopwords.words('english')
-stop_words.extend(['from', 'subject', 're', 'edu', 'use', 'com', 'https', 'url', 'link', 'xe', 'abstract', 'author', 'chapter', 'springer', 'title', "the", "of", "and", "in", "to", "a", "is", "for", "from", "with", "that",	"by", "are", "on", "was", "as", 
-	"were", "url:", "abstract:", "abstract",  "author:", "title:", "at", "be", "an", "during", "have", "this", "which", "study", "been", "species", "not", "has", "between",
-	"using", "its", "also", "these", "this", "used", "over", "can", "within", "into", "all","due", "use", "about", "a", 'it', 'their', "where", "we", "most", "may", "through",
-	"though", "like", "or", "further", "e.g.", "along", "any", "those", "had", "toward", "due", "both", "some", "use", "even", "more", "but", "while", "pass", 
-	"well", "will", "when", "only", "after", "author", "title", "there", "our", "did", "much", "as", "if", "become", "still", "various", "very", "out",
-	"they", "via", "available", "such", "than", "different", "many", "areas", "no", "one", "two", "small", "first", "other", "such", "-", "could", "studies", "high",
-	"provide", "among", "highly", "no", "case", "across", "given", "need", "would", "under", "found", "low", "values", "xe2\\x80\\x89", "xa", "xc", "xb", "\xc2\xa0C\xc2\xa0ha\xe2\x88\x921", "suggest", "up", "'The", "area"])
+stop_words.extend(['from', 'subject', 're', 'edu', 'use', 'com', 'https', 'url', 'link', 'abstract', 'author', 'chapter', 'springer', 'title', "the", "of", "and", "in", "to", "a", "is", "for", "from", "with", "that", "by", "are", "on", "was", "as", 
+	"were", "url:", "abstract:", "abstract",  "author:", "title:", "at", "be", "an", "have", "this", "which", "study", "been", "not", "has", "its", "also", "these", "this", "can", "a", 'it', 'their', "e.g.", "those", "had", "but", "while", "will", "when", "only", "author", "title", "there", "our", "did", "as", "if", "they", "such", "than", "no", "-", "could",])
 
 def data_reader(abstracts_log_name, status_logger_name):
 	'''This wherer the file is being parsed from to the model'''
@@ -177,6 +172,9 @@ def nlp_engine_main(abstracts_log_name, status_logger_name):
 
 	nlp_engine_main_end_status_key = "Idling the NLP Engine"
 	status_logger(status_logger_name, nlp_engine_main_end_status_key)
+
+	'''We can arrive at logs_folder_name from abstracts_log_name, instead of passing it to the NLP_Engine function each time'''
+	logs_folder_name = abstracts_log_name.split('Abstract')[0][:-1]
 
 	'''Importing the visualizer_main function to view the LDA Model built by the NLP_engine_main() function'''
 	visualizer_main(lda_model, corpus, id2word, logs_folder_name, status_logger_name)

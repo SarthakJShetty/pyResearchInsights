@@ -8,17 +8,17 @@ Sarthak J. Shetty
 12/09/2018'''
 
 '''Imports scraper_main() from Scraper.py'''
-from Scraper import scraper_main
+from pyResearchInsights.Scraper import scraper_main
 '''Importing the analyzer code here as well'''
-from Analyzer import analyzer_main
+from pyResearchInsights.Analyzer import analyzer_main
 '''Importing the Cleaner functions here that removes special characters from the corpus'''
-from Cleaner import cleaner_main
+from pyResearchInsights.Cleaner import cleaner_main
 '''Importing the visualizer and gensim code here'''
-from NLP_Engine import nlp_engine_main
+from pyResearchInsights.NLP_Engine import nlp_engine_main
 '''Imports some of the functions required by different scripts here.'''
-from common_functions import pre_processing, arguments_parser, end_process
+from pyResearchInsights.common_functions import pre_processing, arguments_parser, end_process
 '''Declaring tarballer here from system_functions() to tarball the LOG directory, & rm_original_folder to delete the directory and save space.'''
-from system_functions import tarballer, rm_original_folder
+from pyResearchInsights.system_functions import tarballer, rm_original_folder
 
 '''Keywords from the user are extracted here'''
 keywords_to_search, trend_keywords = arguments_parser()
