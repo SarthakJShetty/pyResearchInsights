@@ -25,7 +25,7 @@ import numpy as np
 '''This library is imported to check if we can feasibly introduce delays into the processor loop to reduce instances of the remote server, shutting the connection while scrapping extraordinarily large datasets.'''
 import time
 '''Fragmenting code into different scripts. Some functions are to be used across the different sub-parts as well. Hence, shifted some of the functions to the new script.'''
-from pyResearchInsights.common_functions import pre_processing, status_logger
+from pyResearchInsights.common_functions import pre_processing,  argument_formatter, status_logger
 
 def url_reader(url, status_logger_name):
 	'''This keyword is supplied to the URL and is hence used for souping.
@@ -388,6 +388,19 @@ def processor(abstract_url, urls_to_scrape, abstract_id_log_name, abstracts_log_
 
 def scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, trend_keywords, keywords_to_search, status_logger_name):
 	''''This function contains all the functions and contains this entire script here, so that it can be imported later to the main function'''
+
+	if(type(keywords_to_search) == str):
+		'''If the user ran the code using just the function from the library, then the keywords and trends words need to be in this format'''
+		keywords_to_search = argument_formatter(keywords_to_search)
+	else:
+		keywords_to_search = keywords_to_search
+
+	if(type(trend_keywords) == str):
+		'''If the trend_keywords is provided as well, we need to lower it before passing it to the rest of the pipeline'''
+		trend_keywords = trend_keywords.lower()
+		trend_keywords = argument_formatter(trend_keywords)
+	else:
+		trend_keywords = trend_keywords
 
 	'''Provides the links for the URLs to be scraped by the scraper'''
 	urls_to_scrape = url_generator(start_url, query_string, status_logger_name)

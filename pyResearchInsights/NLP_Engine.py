@@ -135,7 +135,7 @@ def lemmatization(status_logger_name, textual_data, allowed_postags=['NOUN', 'AD
 
 	return texts_out
 
-def nlp_engine_main(abstracts_log_name, status_logger_name):
+def nlp_engine_main(abstracts_log_name, trend_keywords, status_logger_name):
 	nlp_engine_main_start_status_key = "Initiating the NLP Engine"
 	status_logger(status_logger_name, nlp_engine_main_start_status_key)
 
@@ -173,10 +173,7 @@ def nlp_engine_main(abstracts_log_name, status_logger_name):
 	nlp_engine_main_end_status_key = "Idling the NLP Engine"
 	status_logger(status_logger_name, nlp_engine_main_end_status_key)
 
-	'''We can arrive at logs_folder_name from abstracts_log_name, instead of passing it to the NLP_Engine function each time'''
-	logs_folder_name = abstracts_log_name.split('Abstract')[0][:-1]
-
 	'''Importing the visualizer_main function to view the LDA Model built by the NLP_engine_main() function'''
-	visualizer_main(lda_model, corpus, id2word, logs_folder_name, status_logger_name)
+	visualizer_main(lda_model, corpus, id2word, trend_keywords, abstracts_log_name, status_logger_name)
 
 	return 0

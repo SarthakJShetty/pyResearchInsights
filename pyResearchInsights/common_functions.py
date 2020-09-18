@@ -42,6 +42,10 @@ def pre_processing(keywords):
 		1. Location of Abstract_ID_Database
 		2. Location of Abstract_Database'''
 
+	if((type(keywords) == str)):
+		'''If the user uses the function independently of the argument_parser() we need this to convert the keywords to a list of words'''
+		keywords = keywords.split()
+
 	'''Declaring the time and date variables here. Year, month, day, hours, minute & seconds.'''
 	run_start_year = str(datetime.now().date().year)
 	run_start_month = str(datetime.now().date().month)
@@ -94,6 +98,10 @@ def pre_processing(keywords):
 
 	return abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, logs_folder_name, status_logger_name
 
+def argument_formatter(argument_string):
+	'''We make this into a function so that we can use it across the pyResearchInsights stack'''
+	return argument_string.split()
+
 def arguments_parser():
 	'''This function is used to read the initial keyword that will be queried in Springer (for now).
 	We will be scrapping Science, Nature etc later, as long as generic URLs are supported.
@@ -112,7 +120,8 @@ def arguments_parser():
 		keywords = arguments.keywords
 	'''The keyword if a string will be split and then be passed to the scraper functions'''
 
-	keywords = keywords.split()
+	keywords = argument_formatter(keywords)
+
 	if arguments.trends:
 		trends = arguments.trends
 	'''The entire list of the abstract words will be lowered and hence trends term has to be
@@ -123,7 +132,7 @@ def arguments_parser():
 	'''If this argument is turned to Yes, then the papers will be downloaded as well'''
 
 	trends = trends.lower()
-	trends = trends.split()
+	trends = argument_formatter(trends)
 
 	return keywords, trends
 

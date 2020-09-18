@@ -7,7 +7,7 @@ Check out the repository README.md for a high-level overview of the project and 
 
 Sarthak J. Shetty
 24/11/2018'''
-from pyResearchInsights.common_functions import status_logger
+from pyResearchInsights.common_functions import argument_formatter, status_logger
 '''import matplotlib as plt'''
 import matplotlib.pyplot as plt
 '''Library necessary to develop the html visualizations'''
@@ -24,13 +24,13 @@ def visualizer_generator(lda_model, corpus, id2word, logs_folder_name, status_lo
 	visualizer_generator_end_status_key = "Prepared the topic modeling visualization"+" "+logs_folder_name+"/"+"Data_Visualization_Topic_Modelling.html"
 	status_logger(status_logger_name, visualizer_generator_end_status_key)		
 
-def trends_histogram(abstract_word_dictionary, starting_year, ending_year, trend_keywords, logs_folder_name, status_logger_name):
+def trends_histogram(abstracts_log_name, logs_folder_name, trend_keywords, status_logger_name):
 	'''This function is responsible for generating the histograms to visualizations the trends in research topics.'''
 	trends_histogram_start_status_key = "Generating the trends histogram"
 	status_logger(status_logger_name, trends_histogram_start_status_key)
 
 	'''What's happening here?
-	a) trends function receives the dictionary prepared by the Scraper code.
+	a) trends_histogram receives the dictionary filename for the dictionary prepared by the Scraper code.
 	b) Information is organized in a conventional key and value form; key=year, value=frequency.
 	c) We extract the key from the dictionary and generate a new list comprising of the years in which the trend keywords occurs.
 	d) We calculate the max and min years in this new list and convert them to int and extract the complete set of years that lie between these extremes.
@@ -40,13 +40,38 @@ def trends_histogram(abstract_word_dictionary, starting_year, ending_year, trend
 
 	'''This list will hold the abstract years which contain occurrences of the word that we are investigating'''
 	list_of_years=[]
-	for element in abstract_word_dictionary:
-		list_of_years.append(element)
-	list_of_years_to_be_plotted = [year for year in range(int(starting_year), int(ending_year)+1)]
-	'''Here we generate the corresponding frequencies'''
-	frequencies_to_be_plotted = [int(abstract_word_dictionary[str(year)]) for year in range(int(starting_year), int(ending_year)+1)]
+	list_of_frequencies = []
+
+	'''Accessing the dictionary data dumped by the Scraper code'''
+	abstract_word_dictionary_file = open(abstracts_log_name + '_DICTIONARY.csv', 'r')
+
+	'''Here we collect the dictionary data dumped by the Scraper code'''
+	for line in abstract_word_dictionary_file:
+		list_of_years.append(int(line.split(',')[0]))
+		list_of_frequencies.append(int(line.split(',')[1][:-1]))
+
+	'''Tabulating the start and the ending years of appearence of the specific trend_keywords'''
+	starting_year = min(list_of_years)
+	ending_year = max(list_of_years)
+
+	'''Recreating the actual dictionary here'''
+	abstract_word_dictionary = {list_of_years[year]:list_of_frequencies[year] for year in range(0, len(list_of_years))}
+
+	'''Generating a continuous list of years to be plotted from the abstracts collected'''
+	list_of_years_to_be_plotted = [year for year in range((starting_year), (ending_year)+1)]
+	
+	frequencies_to_be_plotted = []
+
+	'''Here we generate the corresponding frequencies for each of the years recorded'''
+	for year in range(starting_year, ending_year+1):
+		try:
+			frequencies_to_be_plotted.append(abstract_word_dictionary[year])
+		except KeyError:
+			frequencies_to_be_plotted.append(0)
+
 	'''Here, we will generate a list of frequencies to be plotted along the Y axis, using the Y ticks function'''
 	y_ticks_frequency = []
+
 	'''Extracting the largest frequency value in the list to generate the Y ticks list'''
 	max_frequency_value = max(frequencies_to_be_plotted)
 	for frequency_element in range(0, max_frequency_value+1):
@@ -80,12 +105,25 @@ def trends_histogram(abstract_word_dictionary, starting_year, ending_year, trend
 	trends_histogram_end_status_key = "Generated the trends graph"+" "+logs_folder_name+"/"+"Data_Visualization_Trends_Graph"+"_"+trend_keywords[0]+".png"
 	status_logger(status_logger_name, trends_histogram_end_status_key)
 
-def visualizer_main(lda_model, corpus, id2word, logs_folder_name, status_logger_name):
+def	visualizer_main(lda_model, corpus, id2word, trend_keywords, abstracts_log_name, status_logger_name):
 	visualizer_main_start_status_key = "Entering the visualizer_main() code"
 	status_logger(status_logger_name, visualizer_main_start_status_key)
 
+	if(type(trend_keywords) == str):
+		'''If the user ran the code using just the function from the library, then the trends words need to be in this format'''
+		trend_keywords = trend_keywords.lower()
+		trend_keywords = argument_formatter(trend_keywords)
+	else:
+		trend_keywords = trend_keywords
+
+	'''We can arrive at logs_folder_name from abstracts_log_name, instead of passing it to the NLP_Engine function each time'''
+	logs_folder_name = abstracts_log_name.split('Abstract')[0][:-1]
+
 	'''This the main visualizer code. Reorging this portion of the code to ensure modularity later on as well.'''
 	visualizer_generator(lda_model, corpus, id2word, logs_folder_name, status_logger_name)
+
+	'''We generate the trends histogram here to analyze the frequency of a specific keyword over the time-period of publication of the corresponding journals'''
+	trends_histogram(abstracts_log_name, logs_folder_name, trend_keywords, status_logger_name)
 
 	visualizer_main_end_status_key = "Exiting the visualizer_main() code"
 	status_logger(status_logger_name, visualizer_main_end_status_key)
