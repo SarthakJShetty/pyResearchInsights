@@ -118,15 +118,12 @@ def abstract_year_list_post_processor(permanent_word_sorter_list, status_logger_
 	abstract_year_list_post_processor_start_status_key = "Post processing of permanent word sorter list has commenced"
 	status_logger(status_logger_name, abstract_year_list_post_processor_start_status_key)
 
-	starting_year = min(permanent_word_sorter_list)
-	ending_year = max(permanent_word_sorter_list)
-
 	abstract_year_dictionary = Counter(permanent_word_sorter_list)
 
 	abstract_year_list_post_processor_end_status_key = "Post processing of permanent word sorter list has completed"
 	status_logger(status_logger_name, abstract_year_list_post_processor_end_status_key)
 
-	return abstract_year_dictionary, starting_year, ending_year
+	return abstract_year_dictionary
 
 def abstract_year_dictionary_dumper(abstract_word_dictionary, abstracts_log_name, status_logger_name):
 	'''This function saves the abstract word dumper to the disc for further inspection.
@@ -366,7 +363,6 @@ def processor(abstract_url, urls_to_scrape, abstract_id_log_name, abstracts_log_
 	permanent_word_sorter_list = word_sorter_list_generator(status_logger_name)
 
 	for site_url_index in range(0, len(urls_to_scrape)):
-		print(urls_to_scrape[site_url_index])
 		if(site_url_index==0):
 			results_determiner(urls_to_scrape[site_url_index], status_logger_name)
 		'''Collects the web-page from the url for souping'''
@@ -382,7 +378,7 @@ def processor(abstract_url, urls_to_scrape, abstract_id_log_name, abstracts_log_
 
 	'''This line of code processes and generates a dictionary from the abstract data'''
 
-	abstract_year_dictionary, starting_year, ending_year = abstract_year_list_post_processor(permanent_word_sorter_list, status_logger_name)
+	abstract_year_dictionary = abstract_year_list_post_processor(permanent_word_sorter_list, status_logger_name)
 
 	return abstract_year_dictionary
 
