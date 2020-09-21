@@ -28,8 +28,15 @@ def txt_to_list(abstract_directory, status_logger_name):
     txt_to_list_start_status_key = "Converting text to list"
     status_logger(status_logger_name, txt_to_list_start_status_key)
 
-    cleaner_abstract_directory = (abstract_directory.split(".txt")[0])+"_"+'ANALYTICAL.txt'
-    folder = open(cleaner_abstract_directory, 'r')
+    try:
+        '''If the Cleaner script is run independently, not as part of the pipeline as a whole, there would be no filename_ANALYTICAL.txt.
+        This ensures that that file can be processed independently.'''
+        cleaner_abstract_directory = (abstract_directory.split(".txt")[0])+"_"+'ANALYTICAL.txt'
+        folder = open(cleaner_abstract_directory, 'r')
+    except FileNotFoundError:
+        cleaner_abstract_directory = (abstract_directory.split(".txt")[0])+'.txt'
+        folder = open(cleaner_abstract_directory, 'r')
+
     abstracts = []
 
     for line in folder:
