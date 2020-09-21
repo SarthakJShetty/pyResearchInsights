@@ -1,4 +1,4 @@
-'''Hello! We have decided to fragment the entire code, and run it off of one common script.
+'''Hello! We have decided to modularize the entire code, and run it off of one common script.
 In the future, the Analyzer.py and the Visualizer.py scripts will be called here as well.
 
 Check out the build-log.md for a detailed changes implemented.
@@ -16,12 +16,12 @@ from pyResearchInsights.Cleaner import cleaner_main
 '''Importing the visualizer and gensim code here'''
 from pyResearchInsights.NLP_Engine import nlp_engine_main
 '''Imports some of the functions required by different scripts here.'''
-from pyResearchInsights.common_functions import pre_processing, arguments_parser, end_process
+from pyResearchInsights.common_functions import pre_processing
 '''Declaring tarballer here from system_functions() to tarball the LOG directory, & rm_original_folder to delete the directory and save space.'''
 from pyResearchInsights.system_functions import tarballer, rm_original_folder
 
-'''Keywords from the user are extracted here'''
-keywords_to_search, trend_keywords = arguments_parser()
+keywords_to_search = "Western Ghats Conservation"
+trend_keywords = "Conservation"
 
 '''Calling the pre_processing functions here so that data is available across the code.'''
 abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, logs_folder_name, status_logger_name = pre_processing(keywords_to_search)
@@ -36,13 +36,4 @@ cleaner_main(abstracts_log_name, status_logger_name)
 analyzer_main(abstracts_log_name, status_logger_name)
 
 '''Calling the visualizer code below this portion'''
-nlp_engine_main(abstracts_log_name, status_logger_name)
-
-'''Evoking the tarballer here to tarball the LOG directory generated during the run'''
-tarballer(logs_folder_name, status_logger_name)
-
-'''Declaring the end of a successful run of the code'''
-end_process(status_logger_name)
-
-'''Deleting the files generated once the directory has been tarballed'''
-rm_original_folder(logs_folder_name, status_logger_name)
+nlp_engine_main(abstracts_log_name, trend_keywords, status_logger_name)

@@ -184,7 +184,7 @@ def abstract_crawler(abstract_url, abstract_id_log_name, abstracts_log_name, per
 			abstract_crawler_reject_status_key="Abstract Number:"+" "+str(abstract_input_tag_ids.index(abstract_input_tag_id)+1)+" "+"could not be processed"
 			status_logger(status_logger_name, abstract_crawler_reject_status_key)
 			pass
-	
+
 	abstract_crawler_end_status_key = "Exiting the Abstract Crawler"
 	status_logger(status_logger_name, abstract_crawler_end_status_key)
 
