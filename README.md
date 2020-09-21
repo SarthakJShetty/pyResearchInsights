@@ -20,7 +20,7 @@
 - Academic publishing has risen 2-fold in the past ten years, making it nearly impossible to sift through a large number of papers and identify broad areas of research within disciplines.
 
 <div style="text-align:center">
-	<img src="assets/Increase.png" alt="Increase in number of scientific publications">
+	<img src="https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/Increase.png" alt="Increase in number of scientific publications">
 </div>
 
 <i>***Figure 1.1*** Increase in the number of scientific publications in the fields of physics and chemistry [1].</i>
@@ -56,7 +56,7 @@ This project is a collaboration between <a title="Sarthak" href="https://Sarthak
 
 ## 3.0 How it works:
 
-<img src="assets/Bias.png" alt="Bias Pipeline">
+<img src="https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/Bias.png" alt="Bias Pipeline">
 
 <i>***Figure 3.1*** Diagramatic representation of pipeline for collecting papers and generating visualizations.</i>
 
@@ -71,7 +71,7 @@ This project is a collaboration between <a title="Sarthak" href="https://Sarthak
 
 - A <a title="Status Logger" href="https://github.com/SarthakJShetty/Bias/blob/journal/LOGS/LOG_2019-04-24_19_35_East_Melanesian_Islands/Status_Logger_2019-04-24_19_35.txt" target="_blank">```status_logger```</a> is used to log the sequence of commands in the program.
 
-<img src="assets/Scraper.png" alt="Scraper grabbing the papers from Springer">
+<img src="https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/Scraper.png" alt="Scraper grabbing the papers from Springer">
 
 <i> **Figure 3.2** <a title="Scraper" href="https://github.com/SarthakJShetty/Bias/blob/master/Scraper.py">```Scraper.py```</a> script grabbing the papers from <a title="Springer" href="https://www.link.Springer.com" target="_blank">Springer</a>.</i>
 
@@ -80,7 +80,7 @@ This project is a collaboration between <a title="Sarthak" href="https://Sarthak
 
 - This script creates a clean variant of the ```.txt``` corpus file that is then stored as <a href="https://github.com/SarthakJShetty/Bias/blob/journal/LOGS/LOG_2019-04-24_19_35_East_Melanesian_Islands/Abstract_Database_2019-04-24_19_35_ANALYTICAL.txt" title="Analytical File">```_ANALYTICAL.txt```</a>, for further analysis and modelling
 
-<img src='assets/Cleaner.png' alt="Cleaner.py cleaned up text">
+<img src='https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/Cleaner.png' alt="Cleaner.py cleaned up text">
 
 <i> **Figure 3.3** <a title="Cleaner" href="https://github.com/SarthakJShetty/Bias/tree/master/Cleaner.py/">```Cleaner.py```</a> script gets rid of formatting and special characters present in the corpus.</i>
 
@@ -91,7 +91,7 @@ This project is a collaboration between <a title="Sarthak" href="https://Sarthak
 
 - This ```.csv``` file is then passed on to the <a title="Visualizer" href="https://github.com/SarthakJShetty/Bias/blob/master/Visualizer.py">```Visualizer.py```</a> to generate the "Trends" <a href="https://github.com/SarthakJShetty/Bias/tree/journal#53-trends-result-" title="Trends Charts">chart</a>.
 
-<img src="assets/Analyzer.png" alt="Analyzer sorting the frequency of each word occuring in the corpus">
+<img src="https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/Analyzer.png" alt="Analyzer sorting the frequency of each word occuring in the corpus">
 
 <i>**Figure 3.4** <a title="Analyzer" href="https://github.com/SarthakJShetty/Bias/tree/master/Analyzer.py/">```Analyzer.py```</a> script generates this ```.csv``` file for analysis by other parts of the pipeline.</i>
 
@@ -194,7 +194,7 @@ To view the logs & results generated from the run on <a title="east Melanesian I
 
 The ```NLP_Engine.py``` module creates topic modelling charts such as the one shown below.
 
-<img src='assets/Topics.png' alt='Topic Modelling Chart'>
+<img src='https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/Topics.png' alt='Topic Modelling Chart'>
 
 <i>***Figure 5.1*** Distribution of topics discussed in publications pulled from <a title="Ecology Journals" href="journals.md">8 conservation and ecology themed journals</a></i>.
 
@@ -204,7 +204,7 @@ The ```NLP_Engine.py``` module creates topic modelling charts such as the one sh
 
 ### 5.2 Weights and Frequency Results:
 
-<img src = 'assets/WeightsAndFrequency.png' alt= "Weights and Frequncy">
+<img src = 'https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/WeightsAndFrequency.png' alt= "Weights and Frequncy">
 
 <i>***Figure 5.2*** Here, we plot the variation in the weights and frequency of keywords falling under topic one from the chart <a title="Link to Topic Modelling charts" href="https://github.com/SarthakJShetty/Bias/tree/journal/#51-topic-modelling-results">above</a>.</i>
 
@@ -214,7 +214,7 @@ The ```NLP_Engine.py``` module creates topic modelling charts such as the one sh
 
 ### 5.3 Trends Result *:
 
-<img src = "assets/XKCD.png" alt = 'Trends Chart for Eastern '>
+<img src = "https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/XKCD.png" alt = 'Trends Chart for Eastern '>
 
 <i>***Figure 5.3*** Variation in the frequency of a the term "Conservation" over time in the corpus of text scrapped.</i>
 
