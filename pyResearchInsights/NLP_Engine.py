@@ -43,16 +43,22 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 from nltk.corpus import stopwords
 stop_words = stopwords.words('english')
 stop_words.extend(['from', 'subject', 're', 'edu', 'use', 'com', 'https', 'url', 'link', 'abstract', 'author', 'chapter', 'springer', 'title', "the", "of", "and", "in", "to", "a", "is", "for", "from", "with", "that", "by", "are", "on", "was", "as", 
-	"were", "url:", "abstract:", "abstract",  "author:", "title:", "at", "be", "an", "have", "this", "which", "study", "been", "not", "has", "its", "also", "these", "this", "can", "a", 'it', 'their', "e.g.", "those", "had", "but", "while", "will", "when", "only", "author", "title", "there", "our", "did", "as", "if", "they", "such", "than", "no", "-", "could",])
+	"were", "url:", "abstract:", "abstract",  "author:", "title:", "at", "be", "an", "have", "this", "which", "study", "been", "not", "has", "its", "also", "these", "this", "can", "a", 'it', 'their', "e.g.", "those", "had", "but", "while", "will", "when", "only", "author", "title", "there", "our", "did", "as", "if", "they", "such", "than", "no", "-", "could"])
 
 def data_reader(abstracts_log_name, status_logger_name):
 	'''This wherer the file is being parsed from to the model'''
 	data_reader_start_status_key = abstracts_log_name+".txt is being ported to dataframe"
 	status_logger(status_logger_name, data_reader_start_status_key)
 
-	textual_dataframe = pd.read_csv(abstracts_log_name+'_'+'CLEANED'+'.txt', delimiter="\t")
+	try:
+		'''If the NLP_Engine script is run independently, not as part of the pipeline as a whole, there would be no filename_CLEAND.txt.
+		This ensures that that file can be processed independently.'''
+		abstracts_txt_file_name = (abstracts_log_name.split(".txt")[0]) + "_" + 'CLEANED.txt'
+		textual_dataframe = pd.read_csv(abstracts_txt_file_name, delimiter="\t")
+	except FileNotFoundError:
+		textual_dataframe = pd.read_csv(abstracts_log_name, delimiter="\t")
 
-	data_reader_end_status_key = abstracts_log_name+".txt has been ported to dataframe"	
+	data_reader_end_status_key = abstracts_log_name + ".txt has been ported to dataframe"	
 	status_logger(status_logger_name, data_reader_end_status_key)
 
 	return textual_dataframe
@@ -135,7 +141,7 @@ def lemmatization(status_logger_name, textual_data, allowed_postags=['NOUN', 'AD
 
 	return texts_out
 
-def nlp_engine_main(abstracts_log_name, trend_keywords, status_logger_name):
+def nlp_engine_main(abstracts_log_name, status_logger_name):
 	nlp_engine_main_start_status_key = "Initiating the NLP Engine"
 	status_logger(status_logger_name, nlp_engine_main_start_status_key)
 
@@ -174,6 +180,6 @@ def nlp_engine_main(abstracts_log_name, trend_keywords, status_logger_name):
 	status_logger(status_logger_name, nlp_engine_main_end_status_key)
 
 	'''Importing the visualizer_main function to view the LDA Model built by the NLP_engine_main() function'''
-	visualizer_main(lda_model, corpus, id2word, trend_keywords, abstracts_log_name, status_logger_name)
+	visualizer_main(lda_model, corpus, id2word, abstracts_log_name, status_logger_name)
 
 	return 0

@@ -21,7 +21,6 @@ from pyResearchInsights.common_functions import pre_processing
 from pyResearchInsights.system_functions import tarballer, rm_original_folder
 
 keywords_to_search = "Western Ghats Conservation"
-trend_keywords = "Conservation"
 
 '''Calling the pre_processing functions here so that data is available across the code.'''
 abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, logs_folder_name, status_logger_name = pre_processing(keywords_to_search)
