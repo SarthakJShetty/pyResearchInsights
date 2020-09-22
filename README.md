@@ -113,7 +113,9 @@ This project is a collaboration between <a title="Sarthak" href="https://Sarthak
 
 To install the package from ```pip``` use the command:
 
-		pip install pyResearchInsights
+```bash
+pip install pyResearchInsights
+```
 
 *This command installs ```pyResearchInsights``` alongwith ```pyLDAvis```, ```numpy```, ```matplotlib```, ```spaCy``` and ```gensim```*
 
