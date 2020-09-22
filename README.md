@@ -123,26 +123,26 @@ To install the package from ```pip``` use the command:
 ### 5.1 Scraper:
 
 ```python
-	from pyResearchInsights.common_functions import pre_processing
-	from pyResearchInsights.Scraper import scraper_main
-	
-	keywords_to_search = "Valdivian Forests Conservation"
-	trend_keywords = "Conservation"
+from pyResearchInsights.common_functions import pre_processing
+from pyResearchInsights.Scraper import scraper_main
 
-	abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, logs_folder_name, status_logger_name = pre_processing(keywords_to_search)
-	scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, trend_keywords, keywords_to_search, status_logger_name)
+keywords_to_search = "Valdivian Forests Conservation"
+trend_keywords = "Conservation"
+
+abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, logs_folder_name, status_logger_name = pre_processing(keywords_to_search)
+scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, trend_keywords, keywords_to_search, status_logger_name)
 ```
 - This script downloads abstracts from [Springer](https://link.springer.com) containing "Valdivian Forests Conservation", and generates a ```.CSV``` file containing the frequency of occurance of the term "Conservation".*
 
 ### 5.2 Cleaner:
 
 ```python
-	from pyResearchInsights.Cleaner import cleaner_main
+from pyResearchInsights.Cleaner import cleaner_main
 
-	abstracts_log_name = "/location/to/txt/file/to/be/cleaned"
-	status_logger_name = "Status_Logger_Name"
+abstracts_log_name = "/location/to/txt/file/to/be/cleaned"
+status_logger_name = "Status_Logger_Name"
 
-	cleaner_main(abstracts_log_name, status_logger_name)
+cleaner_main(abstracts_log_name, status_logger_name)
 ```
 Here,
 
@@ -154,12 +154,12 @@ Here,
 ### 5.3 Analyzer:
 
 ```python
-	from pyResearchInsights.Analyzer import analyzer_main
+from pyResearchInsights.Analyzer import analyzer_main
 
-	abstracts_log_name = "/location/to/txt/file/to/be/analyzed"
-	status_logger_name = "Status_Logger_Name"
+abstracts_log_name = "/location/to/txt/file/to/be/analyzed"
+status_logger_name = "Status_Logger_Name"
 
-	analyzer_main(abstracts_log_name, status_logger_name)
+analyzer_main(abstracts_log_name, status_logger_name)
 ```
 Here,
 
@@ -172,12 +172,12 @@ Here,
 ### 5.3 NLP_Engine:
 
 ```python
-	from pyResearchInsights.NLP_Engine import nlp_engine_main
+from pyResearchInsights.NLP_Engine import nlp_engine_main
 
-	abstracts_log_name = "/location/to/txt/file/to/be/analyzed"
-	status_logger_name = "Status_Logger_Name"
+abstracts_log_name = "/location/to/txt/file/to/be/analyzed"
+status_logger_name = "Status_Logger_Name"
 
-	nlp_engine_main(abstracts_log_name, status_logger_name)
+nlp_engine_main(abstracts_log_name, status_logger_name)
 ```
 Here,
 
@@ -189,29 +189,29 @@ Here,
 ### Example Pipeline:
 
 ```python
-	from pyResearchInsights.common_functions import pre_processing
-	from pyResearchInsights.Scraper import scraper_main
-	from pyResearchInsights.Cleaner import cleaner_main
-	from pyResearchInsights.Analyzer import analyzer_main
-	from pyResearchInsights.NLP_Engine import nlp_engine_main
+from pyResearchInsights.common_functions import pre_processing
+from pyResearchInsights.Scraper import scraper_main
+from pyResearchInsights.Cleaner import cleaner_main
+from pyResearchInsights.Analyzer import analyzer_main
+from pyResearchInsights.NLP_Engine import nlp_engine_main
 
-	keywords_to_search = "Western Ghats Conservation"
-	trend_keywords = '''Conservation'''
+keywords_to_search = "Western Ghats Conservation"
+trend_keywords = '''Conservation'''
 
-	'''Generating the LOG folders where the output files will be saved'''
-	abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, logs_folder_name, status_logger_name = pre_processing(keywords_to_search)
+'''Generating the LOG folders where the output files will be saved'''
+abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, logs_folder_name, status_logger_name = pre_processing(keywords_to_search)
 	
-	'''Scraping the abstracts here'''
-	scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, trend_keywords, keywords_to_search, status_logger_name)
-	
-	'''Cleaning the corpus of special characters'''
-	cleaner_main(abstracts_log_name, status_logger_name)
+'''Scraping the abstracts here'''
+scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, trend_keywords, keywords_to_search, status_logger_name)
 
-	'''Analyzing the frequency of occurence of various words in the corpus'''
-	analyzer_main(abstracts_log_name, status_logger_name)
+'''Cleaning the corpus of special characters'''
+cleaner_main(abstracts_log_name, status_logger_name)
 
-	'''NLP to generate the topics of discussion in the abstracts'''
-	nlp_engine_main(abstracts_log_name, status_logger_name)
+'''Analyzing the frequency of occurence of various words in the corpus'''
+analyzer_main(abstracts_log_name, status_logger_name)
+
+'''NLP to generate the topics of discussion in the abstracts'''
+nlp_engine_main(abstracts_log_name, status_logger_name)
 ```
 
 ## 6.0 Results:
