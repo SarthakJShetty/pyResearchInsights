@@ -12,6 +12,8 @@ from pyResearchInsights.common_functions import argument_formatter, status_logge
 import matplotlib.pyplot as plt
 '''Library necessary to develop the html visualizations'''
 import pyLDAvis
+'''Importing OS to get current working directory (cwd) to tackle abstracts_log_name edge cases'''
+import os
 
 def visualizer_generator(lda_model, corpus, id2word, logs_folder_name, status_logger_name):
 	'''This code generates the .html file with generates the visualization of the data prepared.'''
@@ -105,25 +107,22 @@ def trends_histogram(abstracts_log_name, logs_folder_name, trend_keywords, statu
 	trends_histogram_end_status_key = "Generated the trends graph"+" "+logs_folder_name+"/"+"Data_Visualization_Trends_Graph"+"_"+trend_keywords[0]+".png"
 	status_logger(status_logger_name, trends_histogram_end_status_key)
 
-def	visualizer_main(lda_model, corpus, id2word, trend_keywords, abstracts_log_name, status_logger_name):
+def	visualizer_main(lda_model, corpus, id2word, abstracts_log_name, status_logger_name):
 	visualizer_main_start_status_key = "Entering the visualizer_main() code"
 	status_logger(status_logger_name, visualizer_main_start_status_key)
 
-	if(type(trend_keywords) == str):
-		'''If the user ran the code using just the function from the library, then the trends words need to be in this format'''
-		trend_keywords = trend_keywords.lower()
-		trend_keywords = argument_formatter(trend_keywords)
-	else:
-		trend_keywords = trend_keywords
-
 	'''We can arrive at logs_folder_name from abstracts_log_name, instead of passing it to the NLP_Engine function each time'''
 	logs_folder_name = abstracts_log_name.split('Abstract')[0][:-1]
+
+	if(logs_folder_name == ''):
+		'''This condition is required, if the file is located at the directory of the pyResearchInsights code.'''
+		logs_folder_name = logs_folder_name + os.getcwd()
 
 	'''This the main visualizer code. Reorging this portion of the code to ensure modularity later on as well.'''
 	visualizer_generator(lda_model, corpus, id2word, logs_folder_name, status_logger_name)
 
 	'''We generate the trends histogram here to analyze the frequency of a specific keyword over the time-period of publication of the corresponding journals'''
-	trends_histogram(abstracts_log_name, logs_folder_name, trend_keywords, status_logger_name)
+	# trends_histogram(abstracts_log_name, logs_folder_name, trend_keywords, status_logger_name)
 
 	visualizer_main_end_status_key = "Exiting the visualizer_main() code"
 	status_logger(status_logger_name, visualizer_main_end_status_key)
