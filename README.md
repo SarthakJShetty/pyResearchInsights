@@ -198,13 +198,12 @@ from pyResearchInsights.Analyzer import analyzer_main
 from pyResearchInsights.NLP_Engine import nlp_engine_main
 
 keywords_to_search = "Western Ghats Conservation"
-trend_keywords = '''Conservation'''
 
 '''Generating the LOG folders where the output files will be saved'''
 abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, logs_folder_name, status_logger_name = pre_processing(keywords_to_search)
 	
 '''Scraping the abstracts here'''
-scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, trend_keywords, keywords_to_search, status_logger_name)
+scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, keywords_to_search, status_logger_name)
 
 '''Cleaning the corpus of special characters'''
 cleaner_main(abstracts_log_name, status_logger_name)
