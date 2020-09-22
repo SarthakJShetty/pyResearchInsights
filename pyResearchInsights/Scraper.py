@@ -140,7 +140,7 @@ def abstract_year_dictionary_dumper(abstract_word_dictionary, abstracts_log_name
 	permanent_word_sorter_list_end_status_key = "Dumped the entire dictionary to the disc"
 	status_logger(status_logger_name, permanent_word_sorter_list_end_status_key)
 
-def abstract_page_scraper(abstract_url, abstract_input_tag_id, abstracts_log_name, permanent_word_sorter_list, trend_keywords, site_url_index, status_logger_name):
+def abstract_page_scraper(abstract_url, abstract_input_tag_id, abstracts_log_name, permanent_word_sorter_list, site_url_index, status_logger_name):
 	'''This function is written to scrape the actual abstract of the specific paper,
 	 that is being referenced within the list of abstracts'''
 	abstract_page_scraper_status_key="Abstract ID:"+" "+abstract_input_tag_id
@@ -161,14 +161,14 @@ def abstract_page_scraper(abstract_url, abstract_input_tag_id, abstracts_log_nam
 	'''Due to repeated attribute errors with respect to scraping the abstract, these failsafes had to be put in place.'''
 	try:
 		abstract = abstract_scraper(abstract_soup)
-		abstract_word_extractor(abstract, title, abstract_date, permanent_word_sorter_list, trend_keywords, status_logger_name)
+		# abstract_word_extractor(abstract, title, abstract_date, permanent_word_sorter_list, trend_keywords, status_logger_name)
 	except AttributeError:
 		abstract = "Abstract not available"
 
 	abstract_database_writer(abstract_page_url, title, author, abstract, abstracts_log_name, abstract_date, status_logger_name)
 	analytical_abstract_database_writer(title, author, abstract, abstracts_log_name, status_logger_name)
 
-def abstract_crawler(abstract_url, abstract_id_log_name, abstracts_log_name, permanent_word_sorter_list, trend_keywords, site_url_index, status_logger_name):
+def abstract_crawler(abstract_url, abstract_id_log_name, abstracts_log_name, permanent_word_sorter_list, site_url_index, status_logger_name):
 	abstract_crawler_start_status_key = "Entered the Abstract Crawler"
 	status_logger(status_logger_name, abstract_crawler_start_status_key)
 	
@@ -179,7 +179,7 @@ def abstract_crawler(abstract_url, abstract_id_log_name, abstracts_log_name, per
 		try:
 			abstract_crawler_accept_status_key="Abstract Number:"+" "+str((abstract_input_tag_ids.index(abstract_input_tag_id)+1)+abstract_crawler_temp_index*20)
 			status_logger(status_logger_name, abstract_crawler_accept_status_key)
-			abstract_page_scraper(abstract_url, abstract_input_tag_id, abstracts_log_name, permanent_word_sorter_list, trend_keywords, site_url_index, status_logger_name)
+			abstract_page_scraper(abstract_url, abstract_input_tag_id, abstracts_log_name, permanent_word_sorter_list, site_url_index, status_logger_name)
 		except TypeError:
 			abstract_crawler_reject_status_key="Abstract Number:"+" "+str(abstract_input_tag_ids.index(abstract_input_tag_id)+1)+" "+"could not be processed"
 			status_logger(status_logger_name, abstract_crawler_reject_status_key)
@@ -354,7 +354,7 @@ def delay_function(status_logger_name):
 	delay_function_end_status_key = "Delayed remote server ping:"+" "+str(delay_variable)+" "+"seconds"
 	status_logger(status_logger_name, delay_function_end_status_key)
 
-def processor(abstract_url, urls_to_scrape, abstract_id_log_name, abstracts_log_name, status_logger_name, trend_keywords, keywords_to_search):
+def processor(abstract_url, urls_to_scrape, abstract_id_log_name, abstracts_log_name, status_logger_name, keywords_to_search):
 	''''Multiple page-cycling function to scrape multiple result pages returned from Springer.
 	print(len(urls_to_scrape))'''
 	
@@ -372,7 +372,7 @@ def processor(abstract_url, urls_to_scrape, abstract_id_log_name, abstracts_log_
 		'''Scrapping the page to extract all the abstract IDs'''
 		abstract_id_scraper(abstract_id_log_name, page_soup, site_url_index, status_logger_name)
 		'''Actually obtaining the abstracts after combining ID with the abstract_url'''
-		abstract_crawler(abstract_url, abstract_id_log_name, abstracts_log_name, permanent_word_sorter_list, trend_keywords, site_url_index, status_logger_name)
+		abstract_crawler(abstract_url, abstract_id_log_name, abstracts_log_name, permanent_word_sorter_list, site_url_index, status_logger_name)
 		'''Delaying after each page being scrapped, rather than after each abstract'''
 		delay_function(status_logger_name)
 
@@ -382,7 +382,7 @@ def processor(abstract_url, urls_to_scrape, abstract_id_log_name, abstracts_log_
 
 	return abstract_year_dictionary
 
-def scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, trend_keywords, keywords_to_search, status_logger_name):
+def scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, keywords_to_search, status_logger_name):
 	''''This function contains all the functions and contains this entire script here, so that it can be imported later to the main function'''
 
 	if(type(keywords_to_search) == str):
@@ -391,17 +391,10 @@ def scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_u
 	else:
 		keywords_to_search = keywords_to_search
 
-	if(type(trend_keywords) == str):
-		'''If the trend_keywords is provided as well, we need to lower it before passing it to the rest of the pipeline'''
-		trend_keywords = trend_keywords.lower()
-		trend_keywords = argument_formatter(trend_keywords)
-	else:
-		trend_keywords = trend_keywords
-
 	'''Provides the links for the URLs to be scraped by the scraper'''
 	urls_to_scrape = url_generator(start_url, query_string, status_logger_name)
 	'''Calling the processor() function here'''
-	abstract_year_dictionary = processor(abstract_url, urls_to_scrape, abstract_id_log_name, abstracts_log_name, status_logger_name, trend_keywords, keywords_to_search)
+	abstract_year_dictionary = processor(abstract_url, urls_to_scrape, abstract_id_log_name, abstracts_log_name, status_logger_name, keywords_to_search)
 	'''This function dumps the entire dictionary onto the disc for further analysis and inference.'''
 	abstract_year_dictionary_dumper(abstract_year_dictionary, abstracts_log_name, status_logger_name)
 
