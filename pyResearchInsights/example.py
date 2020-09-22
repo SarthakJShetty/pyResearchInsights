@@ -27,7 +27,7 @@ trend_keywords = "Conservation"
 abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, logs_folder_name, status_logger_name = pre_processing(keywords_to_search)
 
 '''Runs the scraper here to scrape the details from the scientific repository'''
-scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, trend_keywords, keywords_to_search, status_logger_name)
+scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, keywords_to_search, status_logger_name)
 
 '''Cleaning the corpus here before any of the other modules use it for analysis'''
 cleaner_main(abstracts_log_name, status_logger_name)
@@ -36,4 +36,4 @@ cleaner_main(abstracts_log_name, status_logger_name)
 analyzer_main(abstracts_log_name, status_logger_name)
 
 '''Calling the visualizer code below this portion'''
-nlp_engine_main(abstracts_log_name, trend_keywords, status_logger_name)
+nlp_engine_main(abstracts_log_name, status_logger_name)
