@@ -96,7 +96,7 @@ def pre_processing(keywords):
 	start_url = "https://link.springer.com/search/page/"
 	abstract_url = 'https://link.springer.com'
 
-	return abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, logs_folder_name, status_logger_name
+	return abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, status_logger_name
 
 def argument_formatter(argument_string):
 	'''We make this into a function so that we can use it across the pyResearchInsights stack'''
