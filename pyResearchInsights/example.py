@@ -23,7 +23,7 @@ from pyResearchInsights.system_functions import tarballer, rm_original_folder
 keywords_to_search = "Western Ghats Conservation"
 
 '''Calling the pre_processing functions here so that data is available across the code.'''
-abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, logs_folder_name, status_logger_name = pre_processing(keywords_to_search)
+abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, status_logger_name = pre_processing(keywords_to_search)
 
 '''Runs the scraper here to scrape the details from the scientific repository'''
 scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, keywords_to_search, status_logger_name)
