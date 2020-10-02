@@ -7,6 +7,7 @@ Check out the repository README.md for a high-level overview of the project and 
 
 Sarthak J. Shetty
 24/11/2018'''
+
 from pyResearchInsights.common_functions import argument_formatter, status_logger
 '''import matplotlib as plt'''
 import matplotlib.pyplot as plt
@@ -14,6 +15,12 @@ import matplotlib.pyplot as plt
 import pyLDAvis
 '''Importing OS to get current working directory (cwd) to tackle abstracts_log_name edge cases'''
 import os
+'''Generating dictionary from the textual_data that is lemmatized'''
+from collections import Counter
+'''Importing pandas to create the dataframes to plot the histograms'''
+import pandas as pd
+'''Importing the colormap functions using matplotlib'''
+from matplotlib import cm
 
 def visualizer_generator(lda_model, corpus, id2word, logs_folder_name, status_logger_name):
 	'''This code generates the .html file with generates the visualization of the data prepared.'''
@@ -25,6 +32,68 @@ def visualizer_generator(lda_model, corpus, id2word, logs_folder_name, status_lo
 
 	visualizer_generator_end_status_key = "Prepared the topic modeling visualization"+" "+logs_folder_name+"/"+"Data_Visualization_Topic_Modelling.html"
 	status_logger(status_logger_name, visualizer_generator_end_status_key)		
+
+def topic_builder(lda_model, num_topics, textual_data_lemmatized, logs_folder_name, status_logger_name):
+	'''We generate histograms here to present the frequency and weights of the keywords of each topic and save them to the disc for further analysis'''
+	topic_builder_start_status_key = "Preparing the frequency and weights vs keywords charts"
+	status_logger(status_logger_name, topic_builder_start_status_key)
+
+	'''Setting the colormaps here to generate the num_topics charts that proceed'''
+	colorchart = cm.get_cmap('plasma', num_topics)
+
+	topics = lda_model.show_topics(num_topics = -1, num_words = 20, formatted=False)
+	data_flat = [w for w_list in textual_data_lemmatized for w in w_list]
+	counter = Counter(data_flat)
+
+	'''Generating a pandas dataframe that contains the word, topic_id, importance and word_count'''
+	out = []
+	for i, topic in topics:
+	    for word, weight in topic:
+	        out.append([word, i , weight, counter[word]])
+
+	'''We will use bits of this dataframe across this function'''
+	df = pd.DataFrame(out, columns=['word', 'topic_id', 'importance', 'word_count'])
+
+	for topic in range (0, num_topics):
+		'''Progressively generating the figures comprising the weights and frequencies for each keyword in each topic'''
+		fig, ax = plt.subplots(1,1, figsize=[20, 15])
+		x_axis = [x_axis_element for x_axis_element in range(0, 20)]
+
+		'''Creating the x_axis labels here, which is the topic keywords'''
+		x_axis_labels = [element for element in df.loc[df.topic_id==topic, 'word']]
+		y_axis = [round(element, 2) for element in df.loc[df.topic_id==topic, 'word_count']]
+
+		'''Here, we make sure that the y_axis labels are equally spaced, and that there are 10 of them'''
+		word_count_list = [word_count for word_count in df.loc[df.topic_id==topic, 'word_count']]
+		word_count_increment = (max(word_count_list)/10)
+		y_axis_labels = [0 + increment*(word_count_increment) for increment in range(0, num_topics)]
+
+		'''Here, we make sure that the y_axis_twin labels are equally spaced, and that there are 10 of them'''        
+		word_importance_list = [word_count for word_count in df.loc[df.topic_id==topic, 'importance']]
+		word_importance_increment = (max(word_importance_list)/10)
+		y_axis_twin_labels = [0 + increment*(word_importance_increment) for increment in range(0, num_topics)]
+
+		plt.xticks(x_axis, x_axis_labels, rotation=40, horizontalalignment='right', fontsize = 25)
+		ax.bar(x_axis, y_axis, width=0.5, alpha=0.3, color=colorchart.colors[topic], label="Word Count")
+		ax.set_yticks(y_axis_labels)
+		ax.tick_params(axis = 'y', labelsize = 25)
+		ax.set_ylabel('Word Count', color=colorchart.colors[topic], fontsize = 25)
+		ax.legend(loc='upper left', fontsize = 20)
+
+		'''Generating the second set of barplots here'''		
+		ax_twin = ax.twinx()
+		ax_twin.bar(x_axis, df.loc[df.topic_id==topic, 'importance'], width=0.2, color=colorchart.colors[topic], label = "Weight")
+		ax_twin.set_ylabel('Weight', color=colorchart.colors[topic], fontsize = 25)
+		ax_twin.set_yticks(y_axis_twin_labels)
+		ax_twin.tick_params(axis='y', labelsize = 25)
+		ax_twin.legend(loc='upper right', fontsize = 20)
+		plt.title('Topic Number: '+str(topic), color=colorchart.colors[topic], fontsize=25)
+
+		'''Saving each of the charts generated to the disc'''		
+		plt.savefig(logs_folder_name + '/FrequencyWeightChart_TopicNumber_' + str(topic) + '.png')
+
+	topic_builder_end_status_key = "Prepared the frequency and weights vs keywords charts"
+	status_logger(status_logger_name, topic_builder_end_status_key)
 
 def trends_histogram(abstracts_log_name, logs_folder_name, trend_keywords, status_logger_name):
 	'''This function is responsible for generating the histograms to visualizations the trends in research topics.'''
@@ -107,7 +176,7 @@ def trends_histogram(abstracts_log_name, logs_folder_name, trend_keywords, statu
 	trends_histogram_end_status_key = "Generated the trends graph"+" "+logs_folder_name+"/"+"Data_Visualization_Trends_Graph"+"_"+trend_keywords[0]+".png"
 	status_logger(status_logger_name, trends_histogram_end_status_key)
 
-def	visualizer_main(lda_model, corpus, id2word, abstracts_log_name, status_logger_name):
+def	visualizer_main(lda_model, corpus, id2word, textual_data_lemmatized, num_topics, abstracts_log_name, status_logger_name):
 	visualizer_main_start_status_key = "Entering the visualizer_main() code"
 	status_logger(status_logger_name, visualizer_main_start_status_key)
 
@@ -121,8 +190,8 @@ def	visualizer_main(lda_model, corpus, id2word, abstracts_log_name, status_logge
 	'''This the main visualizer code. Reorging this portion of the code to ensure modularity later on as well.'''
 	visualizer_generator(lda_model, corpus, id2word, logs_folder_name, status_logger_name)
 
-	'''We generate the trends histogram here to analyze the frequency of a specific keyword over the time-period of publication of the corresponding journals'''
-	# trends_histogram(abstracts_log_name, logs_folder_name, trend_keywords, status_logger_name)
+	'''We generate histograms here to present the frequency and weights of the keywords of each topic'''
+	topic_builder(lda_model, num_topics, textual_data_lemmatized, logs_folder_name, status_logger_name)
 
 	visualizer_main_end_status_key = "Exiting the visualizer_main() code"
 	status_logger(status_logger_name, visualizer_main_end_status_key)
