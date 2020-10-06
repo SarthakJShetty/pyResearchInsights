@@ -72,12 +72,12 @@ def topic_builder(lda_model, topic_order, num_topics, textual_data_lemmatized, l
 		'''Here, we make sure that the y_axis labels are equally spaced, and that there are 10 of them'''
 		word_count_list = [word_count for word_count in df.loc[df.topic_id==topic, 'word_count']]
 		word_count_increment = (max(word_count_list)/10)
-		y_axis_labels = [0 + increment*(word_count_increment) for increment in range(0, num_topics)]
+		y_axis_labels = [0 + increment*(word_count_increment) for increment in range(0, 10)]
 
 		'''Here, we make sure that the y_axis_twin labels are equally spaced, and that there are 10 of them'''        
 		word_importance_list = [word_count for word_count in df.loc[df.topic_id==topic, 'importance']]
 		word_importance_increment = (max(word_importance_list)/10)
-		y_axis_twin_labels = [0 + increment*(word_importance_increment) for increment in range(0, num_topics)]
+		y_axis_twin_labels = [0 + increment*(word_importance_increment) for increment in range(0, 10)]
 
 		plt.xticks(x_axis, x_axis_labels, rotation=40, horizontalalignment='right', fontsize = 25)
 		ax.bar(x_axis, y_axis, width=0.5, alpha=0.3, color=colorchart.colors[topic], label="Word Count")
