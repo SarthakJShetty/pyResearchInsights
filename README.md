@@ -1,4 +1,4 @@
-# ***pyResearchThemes:*** Analyzing research themes from academic publications
+# ***pyResearchInsights:*** Analyzing research themes from academic publications
 
 :warning: <strong>This package is under active development</strong> :warning:
 
