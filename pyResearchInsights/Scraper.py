@@ -25,7 +25,7 @@ import numpy as np
 '''This library is imported to check if we can feasibly introduce delays into the processor loop to reduce instances of the remote server, shutting the connection while scrapping extraordinarily large datasets.'''
 import time
 '''Fragmenting code into different scripts. Some functions are to be used across the different sub-parts as well. Hence, shifted some of the functions to the new script.'''
-from pyResearchInsights.common_functions import pre_processing,  argument_formatter, status_logger
+from pyResearchInsights.common_functions import pre_processing,  argument_formatter, keyword_url_generator, abstract_id_log_name_generator, status_logger
 
 def url_reader(url, status_logger_name):
 	'''This keyword is supplied to the URL and is hence used for souping.
@@ -382,8 +382,14 @@ def processor(abstract_url, urls_to_scrape, abstract_id_log_name, abstracts_log_
 
 	return abstract_year_dictionary
 
-def scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, keywords_to_search, status_logger_name):
+def scraper_main(keywords_to_search, abstracts_log_name, status_logger_name):
 	''''This function contains all the functions and contains this entire script here, so that it can be imported later to the main function'''
+
+	'''Here, we utilize the keywords provided by the user to generate the URLs for scrapping'''
+	start_url, abstract_url, query_string = keyword_url_generator(keywords_to_search)
+
+	'''Since we receive only the abstracts_log_name, we have to extract the abstract_id_log_name'''
+	abstract_id_log_name =  abstract_id_log_name_generator(abstracts_log_name)
 
 	if(type(keywords_to_search) == str):
 		'''If the user ran the code using just the function from the library, then the keywords and trends words need to be in this format'''
