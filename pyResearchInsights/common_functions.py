@@ -37,14 +37,12 @@ def status_logger_creator(abstracts_log_name):
 
 def pre_processing(keywords):
 	'''This function contains all the pre-processing statements related to the running of the program, including:
-	1. Default starter URL of the page to scrape.
-	2. Default location of LOGS, including:
-		1. Location of Abstract_ID_Database
-		2. Location of Abstract_Database'''
+	1. Abstracts LOG Name
+	2. Status Logger Name'''
 
 	if((type(keywords) == str)):
 		'''If the user uses the function independently of the argument_parser() we need this to convert the keywords to a list of words'''
-		keywords = keywords.split()
+		keywords = argument_formatter(keywords)
 
 	'''Declaring the time and date variables here. Year, month, day, hours, minute & seconds.'''
 	run_start_year = str(datetime.now().date().year)
@@ -54,6 +52,7 @@ def pre_processing(keywords):
 	run_start_hour = str(datetime.now().time().hour)
 	run_start_minute = str(datetime.now().time().minute)
 	run_start_second = str(datetime.now().time().second)
+
 	'''Keywords have to be written into the filename of the LOG that we are running'''
 	folder_attachement = ""
 	if(len(keywords)==1):
@@ -64,9 +63,9 @@ def pre_processing(keywords):
 				folder_attachement = folder_attachement+keywords[keyword_index]
 			else:
 				folder_attachement = folder_attachement+keywords[keyword_index]+"_"
+
 	'''Declaring the LOG folder and the abstract, abstract_id & status_logger files.'''
 	logs_folder_name = "LOGS"+"/"+"LOG"+"_"+run_start_date+'_'+run_start_hour+'_'+run_start_minute+"_"+folder_attachement
-	abstract_id_log_name = logs_folder_name+"/"+'Abstract_ID_Database'+'_'+run_start_date+'_'+run_start_hour+'_'+run_start_minute+"_"
 	abstracts_log_name = logs_folder_name+"/"+'Abstract_Database'+'_'+run_start_date+'_'+run_start_hour+'_'+run_start_minute
 	status_logger_name = logs_folder_name+"/"+'Status_Logger'+'_'+run_start_date+'_'+run_start_hour+'_'+run_start_minute
 
@@ -83,6 +82,14 @@ def pre_processing(keywords):
 	logs_folder_name_status_key = "Built LOG folder for session"
 	status_logger(status_logger_name, logs_folder_name_status_key)
 
+	return abstracts_log_name, status_logger_name
+
+def keyword_url_generator(keywords_to_search):
+	'''Reducing the long output of the pre_processing statement by offloading some of the scraper specific functions to another function'''
+	if((type(keywords_to_search) == str)):
+		'''If the user uses the function independently of the argument_parser() we need this to convert the keywords to a list of words'''
+		keywords = argument_formatter(keywords_to_search)
+
 	query_string = ""
 	if (len(keywords)==1):
 		query_string = keywords[0]
@@ -96,7 +103,12 @@ def pre_processing(keywords):
 	start_url = "https://link.springer.com/search/page/"
 	abstract_url = 'https://link.springer.com'
 
-	return abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, status_logger_name
+	'''We take the keywords here and generate the URLs here'''
+	return start_url, abstract_url, query_string
+
+def abstract_id_log_name_generator(abstracts_log_name):
+	'''We use this function to generate the abstract_id_log_name from the abstracts_log_name'''
+	return abstracts_log_name.split('Abstract')[0] + 'Abstract_ID' + abstracts_log_name.split('Abstract')[1]+'_'
 
 def argument_formatter(argument_string):
 	'''We make this into a function so that we can use it across the pyResearchInsights stack'''
