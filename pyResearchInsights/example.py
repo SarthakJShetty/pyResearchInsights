@@ -22,11 +22,11 @@ from pyResearchInsights.system_functions import tarballer, rm_original_folder
 
 keywords_to_search = "Western Ghats Conservation"
 
-'''Calling the pre_processing functions here so that data is available across the code.'''
-abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, status_logger_name = pre_processing(keywords_to_search)
+'''Calling the pre_processing functions here so that abstracts_log_name and status_logger_name is available across the code.'''
+abstracts_log_name, status_logger_name = pre_processing(keywords_to_search)
 
 '''Runs the scraper here to scrape the details from the scientific repository'''
-scraper_main(abstract_id_log_name, abstracts_log_name, start_url, abstract_url, query_string, keywords_to_search, status_logger_name)
+scraper_main(keywords_to_search, abstracts_log_name, status_logger_name)
 
 '''Cleaning the corpus here before any of the other modules use it for analysis'''
 cleaner_main(abstracts_log_name, status_logger_name)
