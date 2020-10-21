@@ -187,7 +187,11 @@ def	visualizer_main(lda_model, corpus, id2word, textual_data_lemmatized, num_top
 	status_logger(status_logger_name, visualizer_main_start_status_key)
 
 	'''We can arrive at logs_folder_name from abstracts_log_name, instead of passing it to the NLP_Engine function each time'''
-	logs_folder_name = abstracts_log_name.split('Abstract')[0][:-1]
+	if('Abstract' in abstracts_log_name):
+		logs_folder_name = abstracts_log_name.split('Abstract')[0][:-1]
+	else:
+		'''If the user points to an abstracts_log_name that does not contain 'Abstract' and lies at the current working directory then set the logs_folder_name as cwd'''
+		logs_folder_name = ''
 
 	if(logs_folder_name == ''):
 		'''This condition is required, if the file is located at the directory of the pyResearchInsights code.'''
