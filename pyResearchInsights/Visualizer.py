@@ -39,7 +39,7 @@ def visualizer_generator(lda_model, corpus, id2word, logs_folder_name, status_lo
 	visualizer_generator_end_status_key = "Prepared the topic modeling visualization"+" "+logs_folder_name+"/"+"Data_Visualization_Topic_Modelling.html"
 	status_logger(status_logger_name, visualizer_generator_end_status_key)		
 
-def topic_builder(lda_model, topic_order, num_topics, textual_data_lemmatized, logs_folder_name, status_logger_name):
+def topic_builder(lda_model, topic_order, num_topics, num_keywords, textual_data_lemmatized, logs_folder_name, status_logger_name):
 	'''We generate histograms here to present the frequency and weights of the keywords of each topic and save them to the disc for further analysis'''
 	topic_builder_start_status_key = "Preparing the frequency and weights vs keywords charts"
 	status_logger(status_logger_name, topic_builder_start_status_key)
@@ -47,7 +47,7 @@ def topic_builder(lda_model, topic_order, num_topics, textual_data_lemmatized, l
 	'''Setting the colormaps here to generate the num_topics charts that proceed'''
 	colorchart = cm.get_cmap('plasma', num_topics)
 
-	topics = lda_model.show_topics(num_topics = -1, num_words = 20, formatted=False)
+	topics = lda_model.show_topics(num_topics = -1, num_words = num_keywords, formatted=False)
 	data_flat = [w for w_list in textual_data_lemmatized for w in w_list]
 	counter = Counter(data_flat)
 
@@ -62,8 +62,8 @@ def topic_builder(lda_model, topic_order, num_topics, textual_data_lemmatized, l
 
 	for topic in topic_order:
 		'''Progressively generating the figures comprising the weights and frequencies for each keyword in each topic'''
-		fig, ax = plt.subplots(1,1, figsize=[20, 15])
-		x_axis = [x_axis_element for x_axis_element in range(0, 20)]
+		fig, ax = plt.subplots(1, 1, figsize=[20, 15])
+		x_axis = [x_axis_element for x_axis_element in range(0, num_keywords)]
 
 		'''Creating the x_axis labels here, which is the topic keywords'''
 		x_axis_labels = [element for element in df.loc[df.topic_id==topic, 'word']]
@@ -182,7 +182,7 @@ def trends_histogram(abstracts_log_name, logs_folder_name, trend_keywords, statu
 	trends_histogram_end_status_key = "Generated the trends graph"+" "+logs_folder_name+"/"+"Data_Visualization_Trends_Graph"+"_"+trend_keywords[0]+".png"
 	status_logger(status_logger_name, trends_histogram_end_status_key)
 
-def	visualizer_main(lda_model, corpus, id2word, textual_data_lemmatized, num_topics, abstracts_log_name, status_logger_name):
+def	visualizer_main(lda_model, corpus, id2word, textual_data_lemmatized, num_topics, num_keywords, abstracts_log_name, status_logger_name):
 	visualizer_main_start_status_key = "Entering the visualizer_main() code"
 	status_logger(status_logger_name, visualizer_main_start_status_key)
 
@@ -201,7 +201,7 @@ def	visualizer_main(lda_model, corpus, id2word, textual_data_lemmatized, num_top
 	topic_order = visualizer_generator(lda_model, corpus, id2word, logs_folder_name, status_logger_name)
 
 	'''We generate histograms here to present the frequency and weights of the keywords of each topic'''
-	topic_builder(lda_model, topic_order, num_topics, textual_data_lemmatized, logs_folder_name, status_logger_name)
+	topic_builder(lda_model, topic_order, num_topics, num_keywords, textual_data_lemmatized, logs_folder_name, status_logger_name)
 
 	visualizer_main_end_status_key = "Exiting the visualizer_main() code"
 	status_logger(status_logger_name, visualizer_main_end_status_key)

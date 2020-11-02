@@ -141,7 +141,7 @@ def lemmatization(status_logger_name, textual_data, allowed_postags=['NOUN', 'AD
 
 	return texts_out
 
-def nlp_engine_main(abstracts_log_name, status_logger_name, num_topics = None):
+def nlp_engine_main(abstracts_log_name, status_logger_name, num_topics = None, num_keywords = None):
 	nlp_engine_main_start_status_key = "Initiating the NLP Engine"
 	status_logger(status_logger_name, nlp_engine_main_start_status_key)
 
@@ -149,6 +149,11 @@ def nlp_engine_main(abstracts_log_name, status_logger_name, num_topics = None):
 	if num_topics == None:
 		'''If the user has not provided this argument then set to 10'''
 		num_topics = 10
+
+	'''Declaring the number of keywords to be presented by the Visualizer'''
+	if num_keywords == None:
+		'''If the user has not provided this argument then set to 20'''
+		num_keywords = 20
 
 	'''Extracts the data from the .txt file and puts them into a Pandas dataframe buckets'''
 	textual_dataframe = data_reader(abstracts_log_name, status_logger_name)
@@ -185,6 +190,6 @@ def nlp_engine_main(abstracts_log_name, status_logger_name, num_topics = None):
 	status_logger(status_logger_name, nlp_engine_main_end_status_key)
 
 	'''Importing the visualizer_main function to view the LDA Model built by the NLP_engine_main() function'''
-	visualizer_main(lda_model, corpus, id2word, textual_data_lemmatized, num_topics, abstracts_log_name, status_logger_name)
+	visualizer_main(lda_model, corpus, id2word, textual_data_lemmatized, num_topics, num_keywords, abstracts_log_name, status_logger_name)
 
 	return 0
