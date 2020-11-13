@@ -13,8 +13,6 @@ from pyResearchInsights.common_functions import argument_formatter, status_logge
 import matplotlib.pyplot as plt
 '''Library necessary to develop the html visualizations'''
 import pyLDAvis
-'''Importing OS to get current working directory (cwd) to tackle abstracts_log_name edge cases'''
-import os
 '''Generating dictionary from the textual_data that is lemmatized'''
 from collections import Counter
 '''Importing pandas to create the dataframes to plot the histograms'''
@@ -182,20 +180,9 @@ def trends_histogram(abstracts_log_name, logs_folder_name, trend_keywords, statu
 	trends_histogram_end_status_key = "Generated the trends graph"+" "+logs_folder_name+"/"+"Data_Visualization_Trends_Graph"+"_"+trend_keywords[0]+".png"
 	status_logger(status_logger_name, trends_histogram_end_status_key)
 
-def	visualizer_main(lda_model, corpus, id2word, textual_data_lemmatized, num_topics, num_keywords, abstracts_log_name, status_logger_name):
+def	visualizer_main(lda_model, corpus, id2word, textual_data_lemmatized, num_topics, num_keywords, logs_folder_name, status_logger_name):
 	visualizer_main_start_status_key = "Entering the visualizer_main() code"
 	status_logger(status_logger_name, visualizer_main_start_status_key)
-
-	'''We can arrive at logs_folder_name from abstracts_log_name, instead of passing it to the NLP_Engine function each time'''
-	if('Abstract' in abstracts_log_name):
-		logs_folder_name = abstracts_log_name.split('Abstract')[0][:-1]
-	else:
-		'''If the user points to an abstracts_log_name that does not contain 'Abstract' and lies at the current working directory then set the logs_folder_name as cwd'''
-		logs_folder_name = ''
-
-	if(logs_folder_name == ''):
-		'''This condition is required, if the file is located at the directory of the pyResearchInsights code.'''
-		logs_folder_name = logs_folder_name + os.getcwd()
 
 	'''This the main visualizer code. Reorging this portion of the code to ensure modularity later on as well.'''
 	topic_order = visualizer_generator(lda_model, corpus, id2word, logs_folder_name, status_logger_name)
