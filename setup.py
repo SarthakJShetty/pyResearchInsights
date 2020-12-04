@@ -1,12 +1,8 @@
 from distutils.core import setup
-from os import getcwd
-
-'''Using the getcwd() to direct the .py file to the README.md to generate the project description on the pypi repo'''
-description_location = getcwd() + '/README.md' 
-
-'''Reading the README file and setting it to the long_description variable'''
-with open(description_location, encoding = 'utf-8') as f:
-  long_description = f.read()
+from os import path
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
   name = 'pyResearchInsights',         # How you named your package folder (MyLib)
