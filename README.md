@@ -42,9 +42,7 @@ pip install pyResearchInsights
 ```python
 from pyResearchInsights.common_functions import pre_processing
 from pyResearchInsights.Scraper import scraper_main
-
 keywords_to_search = "Valdivian Forests Conservation"
-
 abstracts_log_name, status_logger_name = pre_processing(keywords_to_search)
 scraper_main(keywords_to_search, abstracts_log_name, status_logger_name)
 ```
@@ -61,10 +59,8 @@ Here,
 
 ```python
 from pyResearchInsights.Cleaner import cleaner_main
-
 abstracts_log_name = "/location/to/txt/file/to/be/cleaned"
 status_logger_name = "Status_Logger_Name"
-
 cleaner_main(abstracts_log_name, status_logger_name)
 ```
 Here,
@@ -78,10 +74,8 @@ Here,
 
 ```python
 from pyResearchInsights.Analyzer import analyzer_main
-
 abstracts_log_name = "/location/to/txt/file/to/be/analyzed"
 status_logger_name = "Status_Logger_Name"
-
 analyzer_main(abstracts_log_name, status_logger_name)
 ```
 Here,
@@ -95,10 +89,8 @@ Here,
 
 ```python
 from pyResearchInsights.NLP_Engine import nlp_engine_main
-
 abstracts_log_name = "/location/to/txt/file/to/be/analyzed"
 status_logger_name = "Status_Logger_Name"
-
 nlp_engine_main(abstracts_log_name, status_logger_name)
 ```
 
@@ -121,21 +113,15 @@ from pyResearchInsights.Scraper import scraper_main
 from pyResearchInsights.Cleaner import cleaner_main
 from pyResearchInsights.Analyzer import analyzer_main
 from pyResearchInsights.NLP_Engine import nlp_engine_main
-
 keywords_to_search = "Western Ghats Conservation"
-
 '''Calling the pre_processing functions here so that abstracts_log_name and status_logger_name is available across the code.'''
 abstracts_log_name, status_logger_name = pre_processing(keywords_to_search)
-
 '''Runs the scraper here to scrape the details from the scientific repository'''
 scraper_main(keywords_to_search, abstracts_log_name, status_logger_name)
-
 '''Cleaning the corpus here before any of the other modules use it for analysis'''
 cleaner_main(abstracts_log_name, status_logger_name)
-
 '''Calling the Analyzer Function here'''
 analyzer_main(abstracts_log_name, status_logger_name)
-
 '''Calling the visualizer code below this portion'''
 nlp_engine_main(abstracts_log_name, status_logger_name)
 ```
