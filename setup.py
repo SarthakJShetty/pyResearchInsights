@@ -7,7 +7,7 @@ with open(this_directory + '/pypi-README.md', encoding='utf-8') as f:
 setup(
   name = 'pyResearchInsights',         # How you named your package folder (MyLib)
   packages = ['pyResearchInsights'],   # Chose the same as "name"
-  version = '1.51',      # Start with a small number and increase it with every change you make
+  version = '1.52',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'End-to-end tool for scientific literature analysis',   # Give a short description about your library
   long_description = long_description,
@@ -15,7 +15,7 @@ setup(
   author = 'Sarthak J. Shetty',                   # Type in your name
   author_email = 'sarthakshetty97@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/SarthakJShetty/pyResearchInsights',   # Provide either the link to your github or to your website
-  download_url = 'https://github.com/SarthakJShetty/pyResearchInsights/archive/v_151.tar.gz',    # I explain this later on
+  download_url = 'https://github.com/SarthakJShetty/pyResearchInsights/archive/v_152.tar.gz',    # I explain this later on
   keywords = ['Educational Tools', 'Analysis', 'Scraper', 'Natural Language Processing'],   # Keywords that define your package best
   install_requires=[            # I get to this in a second
           'numpy',
