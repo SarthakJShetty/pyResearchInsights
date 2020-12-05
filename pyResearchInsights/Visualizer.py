@@ -60,7 +60,7 @@ def topic_builder(lda_model, topic_order, num_topics, num_keywords, textual_data
 
 	for topic in topic_order:
 		'''Progressively generating the figures comprising the weights and frequencies for each keyword in each topic'''
-		fig, ax = plt.subplots(1, 1, figsize=[20, 15])
+		_, ax = plt.subplots(1, 1, figsize=[20, 15])
 		x_axis = [x_axis_element for x_axis_element in range(0, num_keywords)]
 
 		'''Creating the x_axis labels here, which is the topic keywords'''
@@ -70,7 +70,7 @@ def topic_builder(lda_model, topic_order, num_topics, num_keywords, textual_data
 		'''Here, we make sure that the y_axis labels are equally spaced, and that there are 10 of them'''
 		word_count_list = [word_count for word_count in df.loc[df.topic_id==topic, 'word_count']]
 		word_count_increment = (max(word_count_list)/10)
-		y_axis_labels = [0 + increment*(word_count_increment) for increment in range(0, 10)]
+		y_axis_labels = [round(0 + increment*(word_count_increment)) for increment in range(0, 10)]
 
 		'''Here, we make sure that the y_axis_twin labels are equally spaced, and that there are 10 of them'''        
 		word_importance_list = [word_count for word_count in df.loc[df.topic_id==topic, 'importance']]
