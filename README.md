@@ -13,8 +13,8 @@
 - To address these issues, we developed ```pyResearchInsights``` an end-to-end, open-source, automated content analysis tool that:
 	- **Scrapes** abstracts from scientific repositories,
 	- **Cleans** the abstracts collected,
-	- **Analyses** temooral frequency of keywords,
-	- **Visualizes** themes of research using natural language processing.
+	- **Analyses** temporal frequency of keywords,
+	- **Visualizes** themes of discussions using natural language processing.
 
 ### 1.1 About:
 
@@ -39,14 +39,19 @@ pip install pyResearchInsights
 ### 3.1 Scraper:
 
 ```python
+'''Importing pre_processing() which generates LOG files during the code run'''
 from pyResearchInsights.common_functions import pre_processing
 
+'''Importing the scraper_main() which initiates the scraping process'''
 from pyResearchInsights.Scraper import scraper_main
 
+'''Abstracts containing these keywords will be scraped from Springer'''
 keywords_to_search = "Valdivian Forests Conservation"
 
+'''The refernce to the LOG folder and the status_logger are returned by pre_processing() here'''
 abstracts_log_name, status_logger_name = pre_processing(keywords_to_search)
 
+'''Calling the scraper_main() to start the scraping processing'''
 scraper_main(keywords_to_search, abstracts_log_name, status_logger_name)
 ```
 
@@ -61,9 +66,16 @@ Here,
 ### 3.2 Cleaner:
 
 ```python
+'''Importing the cleaner_main() to clean the txt file of abstracts'''
 from pyResearchInsights.Cleaner import cleaner_main
+
+'''The location of the file to be cleaned is mentioned here'''
 abstracts_log_name = "/location/to/txt/file/to/be/cleaned"
+
+'''status_logger() logs the seequence of functions executed during the code run'''
 status_logger_name = "Status_Logger_Name"
+
+'''Calling the cleaner_main() here to clean the text file provided'''
 cleaner_main(abstracts_log_name, status_logger_name)
 ```
 Here,
@@ -76,12 +88,16 @@ Here,
 ### 3.3 Analyzer:
 
 ```python
+'''Importing the analyzer_main() to analyze the frequency of keywords encountered in the text file'''
 from pyResearchInsights.Analyzer import analyzer_main
 
+'''The location of the file to be analyzed is mentioned here'''
 abstracts_log_name = "/location/to/txt/file/to/be/analyzed"
 
+'''status_logger() logs the seequence of functions executed during the code run'''
 status_logger_name = "Status_Logger_Name"
 
+'''Calling the cleaner_main() here to analyze the text file provided'''
 analyzer_main(abstracts_log_name, status_logger_name)
 ```
 Here,
@@ -94,12 +110,16 @@ Here,
 ### 3.4 NLP_Engine:
 
 ```python
+'''Importing the nlp_engine_main() to generate the interactive topic modelling charts'''
 from pyResearchInsights.NLP_Engine import nlp_engine_main
 
+'''The location of the abstracts which will be used to train the language models'''
 abstracts_log_name = "/location/to/txt/file/to/be/analyzed"
 
+'''status_logger() logs the seequence of functions executed during the code run'''
 status_logger_name = "Status_Logger_Name"
 
+'''Calling the nlp_engine_main() here to train the language models on the texts provided'''
 nlp_engine_main(abstracts_log_name, status_logger_name)
 ```
 
@@ -110,7 +130,7 @@ Here,
 - ```abstracts_log_name``` - The ```.txt``` file containing the abstracts from which research themes are to be generated.
 - ```status_logger_name``` - File that contains logs the sequence of functions executed for later debugging.
 
-- This script generates the topic modelling charts for the abstracts in the ```abstracts_log_name``` file.
+- This script generates the <a title = 'Result - 1' href = '#topic-modelling-results'>topic modelling</a> and the <a title = 'Result - 2' href = 'frequency-charts'>frequency/weight</a> charts for the abstracts in the ```abstracts_log_name``` file.
 
 ### Example Pipeline:
 
@@ -123,6 +143,7 @@ from pyResearchInsights.Cleaner import cleaner_main
 from pyResearchInsights.Analyzer import analyzer_main
 from pyResearchInsights.NLP_Engine import nlp_engine_main
 
+'''Abstracts containing these keywords will be queried from Springer'''
 keywords_to_search = "Western Ghats Conservation"
 
 '''Calling the pre_processing functions here so that abstracts_log_name and status_logger_name is available across the code.'''
@@ -143,7 +164,7 @@ nlp_engine_main(abstracts_log_name, status_logger_name)
 
 ## 4.0 Results:
 
-### 4.1 Topic Modelling Results:
+### <a id = 'topic-modelling-results'>4.1 Topic Modelling Results</a>:
 
 <img src='https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/Topics.png' alt='Topic Modelling Chart'>
 
@@ -153,7 +174,7 @@ nlp_engine_main(abstracts_log_name, status_logger_name)
 - Each topic is made of a number of keywords, seen on the right.
 - More details regarding the visualizations and the udnerlying mechanics can be checked out [here](https://nlp.stanford.edu/events/illvi2014/papers/sievert-illvi2014.pdf).
 
-### 4.2 Weights and Frequency Results:
+### <a id = 'frequency-charts'>4.2 Weights and Frequency Results</a>:
 
 <img src = 'https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/WeightsAndFrequency.png' alt= "Weights and Frequncy">
 
