@@ -130,7 +130,7 @@ Here,
 - ```abstracts_log_name``` - The ```.txt``` file containing the abstracts from which research themes are to be generated.
 - ```status_logger_name``` - File that contains logs the sequence of functions executed for later debugging.
 
-- This script generates the <a title = 'Result - 1' href = '#topic-modelling-results'>topic modelling</a> and the <a title = 'Result - 2' href = 'frequency-charts'>frequency/weight</a> charts for the abstracts in the ```abstracts_log_name``` file.
+- This script generates the <a title = 'Result - 1' href = '#topic-modelling-results'>topic modelling</a> and the <a title = 'Result - 2' href = '#frequency-charts'>frequency/weight</a> charts for the abstracts in the ```abstracts_log_name``` file.
 
 ### Example Pipeline:
 
