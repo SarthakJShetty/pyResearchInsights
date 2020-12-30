@@ -1,6 +1,5 @@
-'''This code is part of the larger Bias project, where we aim
-to study the biases that exist in academic publications, and are building a 
-web-tool to visualize these biases.
+'''This code is part of the larger pyResearchInsights project, where we aim
+to study the research themes being discussed in scientific publications.
 
 This portion of the code analyzes the contents of the .txt file developed
 by the Scraper.py and saves it to a .csv for later visualization by the

@@ -1,10 +1,4 @@
-'''Hello! This is the third (UPDATE 1.0: Correction, IT IS THE FOURTH PROJECT!) project that I've started in two months.
-Feels great to learn so many new concepts.
-Here's to never stop learning.
-The aim of the project is to measure (quantitatively) the disparity in the the publications
-pertaining to the natural history and ecology of specific geographical regions.
-This project is a collaboration between Vijay Ramesh, Department of Ecology, Evolution & Environmental Biology, Columbia University.
-More info will be added here. Soon.
+'''The aim of this script is to scrape abstracts, author names and date of publication from Springer
 Sarthak J. Shetty
 04/08/2018'''
 

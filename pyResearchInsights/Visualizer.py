@@ -1,8 +1,6 @@
-'''Hello! This code code is part of the Bias project, where we are trying to prove the existence
-of certain biases in academic publications.
+'''Hello! This code code is part of the pyResearchInsights project.
 We will be displaying the results from the NLP_Engine.py code here, using primarily using pyLDAvis library.
 
-Check out the repository build-log.md for a more detailed report of the code working.
 Check out the repository README.md for a high-level overview of the project and the objective.
 
 Sarthak J. Shetty

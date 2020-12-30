@@ -1,8 +1,7 @@
-'''Hello! This module of code is a part of the larger Bias project.
+'''Hello! This module of code is a part of the larger pyResearchInsights project.
 This file was earlier named as Temp_Gensim_Code; code is now bifurcated into Gensim code (this) and a seperate
 visualization code that will be added to the repository as well.
 
-Checkout the build-log.md file for a more detailed explanation of the changes.
 Checkout the Bias README.md for an overview of the project.
 
 Sarthak J. Shetty

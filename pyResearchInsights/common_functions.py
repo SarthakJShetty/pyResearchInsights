@@ -2,7 +2,6 @@
 project as well.
 
 Checkout the README.md for more details regarding the project itself.
-Checkout the build-log.md for a detailed day-to-day (hopefully) progress report.
 
 Sarthak J Shetty
 12/09/2018'''

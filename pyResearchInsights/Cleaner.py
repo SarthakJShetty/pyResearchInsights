@@ -1,6 +1,6 @@
 '''
-Hello! This script is part of the larger Bias project that you can check out here: https://github.com/SarthakJShetty/Bias
-We are trying to use NLP to understand skewed research themes across biodiversity hotspots.
+Hello! This script is part of the larger pyResearchInsights project that you can check out here: https://github.com/SarthakJShetty/pyResearchInsights
+We are trying to build an end-to-end ACA tool here
 -Sarthak
 (03/10/2019)
 

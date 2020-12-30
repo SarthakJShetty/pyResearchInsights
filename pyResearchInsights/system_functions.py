@@ -10,8 +10,7 @@ This script has been renamed as the system_functions.py to carry out OS level in
 4. (Eventually) enable shell script to upload the LOGS generated to GitHub.
 
 - Sarthak J. Shetty
-15/04/2019
-(Still waiting)'''
+15/04/2019'''
 
 '''Importing OS to call the tar function to generate the .tar file.'''
 import os
