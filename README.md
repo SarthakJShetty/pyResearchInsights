@@ -168,7 +168,7 @@ nlp_engine_main(abstracts_log_name, status_logger_name)
 
 <img src='https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/Topics.png' alt='Topic Modelling Chart'>
 
-<i>***Figure 5.1*** Distributiom of topics presented as pyLDAvis charts</i>
+<i>***Figure 5.1*** Distribution of topics presented as pyLDAvis charts</i>
 
 - Circles indicate topics generated from the ```.txt``` file supplied to the ```NLP_Engine.py```, after cleaning and analysis.
 - Each topic is made of a number of keywords, seen on the right.
