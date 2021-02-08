@@ -172,7 +172,7 @@ Here,
 
 <i>***Figure 5.1*** Distribution of topics presented as pyLDAvis charts</i>
 
-- Circles indicate topics generated from the ```.txt``` file supplied to the ```NLP_Engine.py```, after cleaning and analysis.
+- Circles indicate topics generated from the ```.txt``` file supplied to the ```NLP_Engine.py```. The number of topics here can be varied usine the ```--num_topics``` flag of the ```NLP_Engine```.
 - Each topic is made of a number of keywords, seen on the right.
 - More details regarding the visualizations and the udnerlying mechanics can be checked out [here](https://nlp.stanford.edu/events/illvi2014/papers/sievert-illvi2014.pdf).
 
