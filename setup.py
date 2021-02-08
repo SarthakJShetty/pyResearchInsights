@@ -5,7 +5,7 @@ setup(
   version = '1.56',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'End-to-end tool for scientific literature analysis',   # Give a short description about your library
-  long_description = 'README.md',
+  long_description = 'Check out the detailed README [here](https://github.com/SarthakJShetty/pyResearchInsights)!',
   author = 'Sarthak J. Shetty',                   # Type in your name
   author_email = 'sarthakshetty97@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/SarthakJShetty/pyResearchInsights',   # Provide either the link to your github or to your website

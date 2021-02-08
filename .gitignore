@@ -1,3 +1,4 @@
 settings.json
 __pycache__
 *.code-workspace
+*.egg-info/
