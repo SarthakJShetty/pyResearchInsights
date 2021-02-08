@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: pyResearchInsights
+Version: 1.56
+Summary: End-to-end tool for scientific literature analysis
+Home-page: https://github.com/SarthakJShetty/pyResearchInsights
+Author: Sarthak J. Shetty
+Author-email: sarthakshetty97@gmail.com
+License: MIT
+Download-URL: https://github.com/SarthakJShetty/pyResearchInsights/archive/v_155.tar.gz
+Description: README.md
+Keywords: Educational Tools,Analysis,Scraper,Natural Language Processing
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
