@@ -1,6 +1,13 @@
 # ***pyResearchInsights:*** An open-source Python package for scientific text analysis
 
-:warning: <strong>This package is under active development</strong> :warning:
+## Contents 
+[1.0 Introduction](#introduction)
+
+[2.0 Installation](#installation)
+
+[3.0 How it works](#how)
+
+[4.0 Results](#results)
 
 ## <a title='Introduction' id='introduction'>1.0 Introduction</a>:
 
@@ -27,6 +34,8 @@ To install the package using ```pip```, use the command:
 ```bash
 pip install pyResearchInsights
 ```
+
+Since ```pyResearchInsights``` is available on ```pip```, it can be run on [Google Colab](https://colab.research.google.com/drive/1gZjOKr5pfwVMuxCSaGYw20ldFpV4gVws?usp=sharing) as well where users can leverage Google's powerful CPU and GPU hardware.
 
 ## <a title='How it works' id='how'>3.0 How it works</a>:
 
@@ -66,7 +75,7 @@ analyzer_main(abstracts_log_name, status_logger_name)
 nlp_engine_main(abstracts_log_name, status_logger_name)
 ```
 
-In the following sub-secions, we explain how each module of the package works.
+Each module of the pacakage can be run independtely, as described in the following sections:
 
 ### <a title='Scraper' id='how-scraper'>3.1 Scraper</a>:
 
