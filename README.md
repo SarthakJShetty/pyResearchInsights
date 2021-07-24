@@ -39,6 +39,8 @@ Since ```pyResearchInsights``` is available on ```pip```, it can be run on [Goog
 
 [![Run on Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1gZjOKr5pfwVMuxCSaGYw20ldFpV4gVws?usp=sharing)
 
+[![Cite This!](https://zenodo.org/badge/294472065.svg)](https://zenodo.org/badge/latestdoi/294472065)
+
 ## <a title='How it works' id='how'>3.0 How it works</a>:
 
 <img src="https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/Bias.png" alt="Bias Pipeline">
