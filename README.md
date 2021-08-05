@@ -130,6 +130,13 @@ Here,
 
 - This script cleans the ```file_name.txt```  and generates a ```file_name_CLEANED.txt``` file. Abstracts available online are often riddled with poor formatting and special characters.
 
+<img src="https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/Cleaner_1.png">
+<i> <b>Figure 3.2.1a</b> The text collected by the Scraper consists of special characters (second last line in figure above, '30\xc2\xa0cm'), which has to be cleaned before performing topic-modelling</i>
+
+
+<img src="https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/Cleaner_2.png">
+<i><b>Figure 3.2.1b</b> The Cleaner gets rid of the special characters seen throughout the corpus as in Figure 3.2.1a, and thereby ensures legible topic-modelling results</i>
+
 ### <a title='Analyzer' id='how-analyzer'>3.3 Analyzer</a>:
 
 ```python
@@ -183,7 +190,7 @@ Here,
 
 <img src='https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/Topics.png' alt='Topic Modelling Chart'>
 
-<i>***Figure 5.1*** Distribution of topics presented as pyLDAvis charts</i>
+<i>***Figure 4.1*** Distribution of topics presented as pyLDAvis charts</i>
 
 - Circles indicate topics generated from the ```.txt``` file supplied to the ```NLP_Engine.py```. The number of topics here can be varied usine the ```--num_topics``` flag of the ```NLP_Engine```.
 - Each topic is made of a number of keywords, seen on the right.
@@ -193,6 +200,6 @@ Here,
 
 <img src = 'https://raw.githubusercontent.com/SarthakJShetty/Bias/master/assets/WeightsAndFrequency.png' alt= "Weights and Frequncy">
 
-<i>***Figure 5.2*** Here, we plot the variation in the weights and frequency of topic keywords</i>.
+<i>***Figure 4.2*** Here, we plot the variation in the weights and frequency of topic keywords</i>.
 
 - The weight of a keyword is calculated by its: i) frequency of occurance in the corpus and, ii) its frequency of co-occurance with other keywords in the same topic.
