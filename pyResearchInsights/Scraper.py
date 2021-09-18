@@ -5,7 +5,7 @@ Sarthak J. Shetty
 '''Adding the libraries to be used here.'''
 
 '''Importing urllib.request to use urlopen'''
-from urllib.request import urlopen
+from urllib.request import build_opener, HTTPCookieProcessor
 ''''Importing urllib.error to handle errors in HTTP pinging.'''
 import urllib.error
 '''BeautifulSoup is used for souping.'''
@@ -28,7 +28,8 @@ def url_reader(url, status_logger_name):
 	moves on to the next PII number'''
 	try:
 		'''Using the urllib function, urlopen to extract the html_code of the given page'''
-		html_code = urlopen(url)
+		open_connection = build_opener(HTTPCookieProcessor())
+		html_code = open_connection.open(url)
 		'''Closing the abstract window after each abstract has been extracted'''
 		return html_code			
 	except (UnboundLocalError, urllib.error.HTTPError):

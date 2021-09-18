@@ -24,7 +24,7 @@ def visualizer_generator(lda_model, corpus, id2word, logs_folder_name, status_lo
 	status_logger(status_logger_name, visualizer_generator_start_status_key)
 
 	'''Here, we generate the actual topic modelling visualization from thghe model created by pyLDAvis'''
-	textual_data_visualization = pyLDAvis.gensim.prepare(lda_model, corpus, id2word)
+	textual_data_visualization = pyLDAvis.gensim_models.prepare(lda_model, corpus, id2word)
 	pyLDAvis.save_html(textual_data_visualization, logs_folder_name+"/"+"Data_Visualization_Topic_Modelling.html")
 
 	'''Here, we generate the order of topics according to the LDA visualization'''

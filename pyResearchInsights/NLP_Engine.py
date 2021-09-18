@@ -29,7 +29,7 @@ from pyResearchInsights.Visualizer import visualizer_main
 import spacy
 
 import pyLDAvis
-import pyLDAvis.gensim
+import pyLDAvis.gensim_models
 
 '''Make pretty visualizations'''
 import matplotlib as plt
