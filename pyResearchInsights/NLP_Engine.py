@@ -149,7 +149,12 @@ def lemmatization(status_logger_name, textual_data, allowed_postags=['NOUN', 'AD
 	status_logger(status_logger_name, lemmatization_start_status_key)
 
 	texts_out = []
-	nlp = spacy.load('en', disable=['parser', 'ner'])
+	try:
+		nlp = spacy.load('en_core_web_sm', disable=['parser', 'ner'])
+	except OSError:
+		from spacy.cli import download
+		download('en_core_web_sm')
+		nlp = spacy.load('en_core_web_sm', disable=['parser', 'ner'])
 	for sent in textual_data:
 		doc = nlp(" ".join(sent))
 		texts_out.append([token.lemma_ for token in doc if token.pos_ in allowed_postags])
