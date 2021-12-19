@@ -9,6 +9,8 @@
 
 [4.0 Results](#results)
 
+[Citation](#cite)
+
 ## <a title='Introduction' id='introduction'>1.0 Introduction</a>:
 
 - Academic publishing has risen 2-fold in the past ten years, making it nearly impossible to sift through a large number of papers and identify broad areas of research within disciplines.
@@ -35,11 +37,13 @@ To install the package using ```pip```, use the command:
 pip install pyResearchInsights
 ```
 
+**Note:** `pyResearchInsights` requires `python 3.7` to run. If you're unsure about the local dependencies on your system, please use package on [Google Colab](https://colab.research.google.com/) or create a `python 3.7` [Conda](https://docs.conda.io/en/latest/) environment and install `pyResearchInsights` inside that environment.
+
 Since ```pyResearchInsights``` is available on ```pip```, it can be run on [Google Colab](https://colab.research.google.com/drive/1gZjOKr5pfwVMuxCSaGYw20ldFpV4gVws?usp=sharing) as well where users can leverage Google's powerful CPU and GPU hardware.
 
 [![Run on Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1gZjOKr5pfwVMuxCSaGYw20ldFpV4gVws?usp=sharing)
 
-[![Cite This!](https://zenodo.org/badge/294472065.svg)](https://zenodo.org/badge/latestdoi/294472065)
+[![Cite This!](https://zenodo.org/badge/294472065.svg)](https://onlinelibrary.wiley.com/doi/10.1002/ece3.8098)
 
 ## <a title='How it works' id='how'>3.0 How it works</a>:
 
@@ -203,3 +207,17 @@ Here,
 <i>***Figure 4.2*** Here, we plot the variation in the weights and frequency of topic keywords</i>.
 
 - The weight of a keyword is calculated by its: i) frequency of occurance in the corpus and, ii) its frequency of co-occurance with other keywords in the same topic.
+
+## <a title='Citation' id='cite'>Citation</a>:
+If you use `pyReasearchInsights` for your research, please cite us! Here is the BibTex entry for our 2021 Ecology & Evolution [paper](https://onlinelibrary.wiley.com/doi/10.1002/ece3.8098).
+
+		@article{shetty2021pyresearchinsights,
+		title={pyResearchInsights—An open-source Python package for scientific text analysis},
+		author={Shetty, Sarthak J and Ramesh, Vijay},
+		journal={Ecology and Evolution},
+		volume={11},
+		number={20},
+		pages={13920--13929},
+		year={2021},
+		publisher={Wiley Online Library}
+		}
