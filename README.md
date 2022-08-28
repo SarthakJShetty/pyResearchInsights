@@ -209,7 +209,7 @@ Here,
 - The weight of a keyword is calculated by its: i) frequency of occurance in the corpus and, ii) its frequency of co-occurance with other keywords in the same topic.
 
 ## <a title='Citation' id='cite'>Citation</a>:
-If you use `pyReasearchInsights` for your research, please cite us! Here is the BibTex entry for our 2021 Ecology & Evolution [paper](https://onlinelibrary.wiley.com/doi/10.1002/ece3.8098).
+If you use `pyResearchInsights` for your research, please cite us! Here is the BibTex entry for our 2021 Ecology & Evolution [paper](https://onlinelibrary.wiley.com/doi/10.1002/ece3.8098).
 
 		@article{shetty2021pyresearchinsights,
 		title={pyResearchInsights—An open-source Python package for scientific text analysis},
