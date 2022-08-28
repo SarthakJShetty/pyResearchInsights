@@ -54,7 +54,7 @@ def url_generator(start_url, query_string, status_logger_name):
 	url_generator_start_status_key = start_url+" "+"start_url has been received"
 	status_logger(status_logger_name, url_generator_start_status_key)
 
-	'''Initiallizing a list here in order to contain the URLs. Even if a URL does not return valid results,
+	'''Initializing a list here in order to contain the URLs. Even if a URL does not return valid results,
 	it is popped later on from the list.'''
 	urls_to_scrape=[]
 	counter = 0
@@ -63,7 +63,7 @@ def url_generator(start_url, query_string, status_logger_name):
 	status_logger(status_logger_name, initial_url_status_key)
 	urls_to_scrape.append(total_url)
 	test_soup = bs(url_reader(total_url, status_logger_name), 'html.parser')
-	'''Here, we grab the page element that contains the number of pages to be scrapped'''
+	'''Here, we grab the page element that contains the number of pages to be scraped'''
 	determiner = test_soup.findAll('span', {'class':'number-of-pages'})[0].text
 	'''We generate the urls_to_scrape from the stripped down determiner element'''
 	urls_to_scrape = [(start_url+str(counter)+"?facet-content-type=\"Article\"&query="+query_string+"&facet-language=\"En\"") for counter in range(1, (int(determiner.replace(',', '')) + 1))]
@@ -96,7 +96,7 @@ def abstract_word_extractor(abstract, abstract_title, abstract_year, permanent_w
 	abstract = abstract.lower()
 	'''Converting the abstract into a list of words'''
 	abstract_word_list = abstract.split()
-	'''This line of code sorts the elements in the word list alphabetically. Working with dataframes is harden, hence
+	'''This line of code sorts the elements in the word list alphabetically. Working with dataframes is harder, hence
 	we are curbing this issue by modifying the list rather.'''
 	abstract_word_list.sort()
 	'''If the word currently being looped in the abstract list matches the trend word being investigated for, the year it appears
@@ -147,7 +147,7 @@ def abstract_page_scraper(abstract_url, abstract_input_tag_id, abstracts_log_nam
 	title = title_scraper(abstract_soup, status_logger_name)
 	abstract_date = abstract_date_scraper(title, abstract_soup, status_logger_name)
 
-	'''Due to repeated attribute errors with respect to scraping the authors name, these failsafes had to be put in place.'''
+	'''Due to repeated attribute errors with respect to scraping the author's name, these failsafes had to be put in place.'''
 	try:
 		author = author_scraper(abstract_soup, status_logger_name)
 	except AttributeError:
@@ -168,7 +168,7 @@ def abstract_crawler(abstract_url, abstract_id_log_name, abstracts_log_name, per
 	status_logger(status_logger_name, abstract_crawler_start_status_key)
 	
 	abstract_crawler_temp_index  = site_url_index
-	'''This function crawls the page and access each and every abstract'''
+	'''This function crawls the page and accesses each and every abstract'''
 	abstract_input_tag_ids = abstract_id_database_reader(abstract_id_log_name, abstract_crawler_temp_index, status_logger_name)
 	for abstract_input_tag_id in abstract_input_tag_ids:
 		try:
@@ -186,7 +186,7 @@ def abstract_crawler(abstract_url, abstract_id_log_name, abstracts_log_name, per
 def analytical_abstract_database_writer(title, author, abstract, abstracts_log_name, status_logger_name):
 	'''This function will generate a secondary abstract file that will contain only the abstract.
 	The  abstract file generated will be passed onto the Visualizer and Analyzer function, as opposed to the complete 
-	abstract log file containing lot of garbage words in addition to the abstract text.'''
+	abstract log file containing a lot of garbage words in addition to the abstract text.'''
 	analytical_abstract_database_writer_start_status_key = "Writing"+" "+title+" "+"by"+" "+author+" "+"to analytical abstracts file"
 	status_logger(status_logger_name, analytical_abstract_database_writer_start_status_key)
 
@@ -226,7 +226,7 @@ def abstract_database_writer(abstract_page_url, title, author, abstract, abstrac
 
 def abstract_id_database_reader(abstract_id_log_name, site_url_index, status_logger_name):
 	'''This function has been explicitly written to access
-	the abstracts database that the given prgram generates.'''
+	the abstracts database that the given program generates.'''
 	abstract_id_reader_temp_index = site_url_index
 	abstract_id_database_reader_start_status_key = "Extracting Abstract IDs from disc"
 	status_logger(status_logger_name, abstract_id_database_reader_start_status_key)
@@ -291,7 +291,7 @@ def title_scraper(abstract_soup, status_logger_name):
 	'''Purpose of this block is to retrieve the title of the text even if an AttributeError arises'''
 	try:
 		title = str(abstract_soup.find('h1', {'class':'c-article-title'}).text.encode('utf-8'))[1:]
-		'''In case an incorrectly classified asset is to be scrapped (Journal/Chapter as opposed to Article), go through this block in an attempt to retrieve the title.'''
+		'''In case an incorrectly classified asset is to be scraped (Journal/Chapter as opposed to Article), go through this block in an attempt to retrieve the title.'''
 	except AttributeError:
 		try:
 			title = str(abstract_soup.find('h1',{'class':'ChapterTitle'}).text.encode('utf-8'))[1:]
