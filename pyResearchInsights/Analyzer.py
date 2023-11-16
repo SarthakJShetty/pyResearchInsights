@@ -18,6 +18,12 @@ from collections import Counter
 import pandas as pd
 '''Importing numpy here to build the index of the pandas frameword'''
 import numpy as np
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import LatentDirichletAllocation
+import nltk
+from nltk.collocations import BigramCollocationFinder
+from nltk.metrics import BigramAssocMeasures
 
 def analyzer_pre_processing(abstracts_log_name, status_logger_name):
 	'''Carries out the pre-processing tasks, such as folder creation'''
@@ -56,53 +62,49 @@ def list_cleaner(list_to_be_cleaned, status_logger_name):
 	return cleaned_list_of_words_in_abstract
 
 def transfer_function(abstracts_txt_file_name, abstracts_csv_file_name, status_logger_name):
-	'''This function is involved in the actual transfer of data from the .txt file to the .csv file'''
-	transfer_function_status_key = "Copying data from"+" "+str(abstracts_txt_file_name)+" "+"to"+" "+"pandas dataframe"
-	status_logger(status_logger_name, transfer_function_status_key)
+    '''This function now includes TF-IDF, LDA, and bigram phrase extraction'''
+    transfer_function_status_key = "Transferring data to pandas dataframe"
+    status_logger(status_logger_name, transfer_function_status_key)
 
-	'''This list will contain all the words extracted from the .txt abstract file'''
-	list_of_words_in_abstract=[]
+    list_of_words_in_abstract = []
 
-	'''Each word is appended to the list, from the .txt file'''
-	with open(abstracts_txt_file_name, 'r') as abstracts_txt_data:
-		for line in abstracts_txt_data:
-			for word in line.split():
-				list_of_words_in_abstract.append(word)
+    with open(abstracts_txt_file_name, 'r') as abstracts_txt_data:
+        for line in abstracts_txt_data:
+            for word in line.split():
+                list_of_words_in_abstract.append(word)
 
-	'''This function cleans up the data of uneccessary words'''
-	cleaned_list_of_words_in_abstract = list_cleaner(list_of_words_in_abstract, status_logger_name)
+    # Use TF-IDF Vectorizer
+    vectorizer = TfidfVectorizer(stop_words='english')
+    X = vectorizer.fit_transform(list_of_words_in_abstract)
 
-	'''A Counter is a dictionary, where the value is the frequency of term, which is the key'''
-	dictionary_of_abstract_list = Counter(cleaned_list_of_words_in_abstract)
+    # Apply LDA for topic modeling
+    lda = LatentDirichletAllocation(n_components=5)  # Adjust the number of topics
+    lda.fit(X)
 
-	length_of_abstract_list = len(dictionary_of_abstract_list)
+    # Phrase Extraction using Bigrams
+    bigram_finder = BigramCollocationFinder.from_words(list_of_words_in_abstract)
+    bigrams = bigram_finder.nbest(BigramAssocMeasures.likelihood_ratio, 10)
 
-	'''Building a dataframe to hold the data from the list, which in turn contains the data from '''
-	dataframe_of_abstract_words=pd.DataFrame(index=np.arange(0, length_of_abstract_list), columns=['Words', 'Frequency'])
+    # Building DataFrame for visualization
+    dataframe_of_abstract_words = pd.DataFrame({
+        'Words': vectorizer.get_feature_names(),
+        'TF-IDF': X.toarray().flatten(),
+        'Topics': lda.transform(X).flatten()
+    })
 
-	'''An element to keep tab of the number of elements being added to the list'''
-	dictionary_counter = 0
+    # Adding Bigrams
+    dataframe_of_abstract_words['Bigrams'] = pd.Series(bigrams)
 
-	'''Copying elements from the dictionary to the pandas file'''
-	for dictionary_element in dictionary_of_abstract_list:
-		if(dictionary_counter==length_of_abstract_list):
-			pass
-		else:
-			dataframe_of_abstract_words.loc[dictionary_counter, 'Words'] = dictionary_element
-			dataframe_of_abstract_words.loc[dictionary_counter, 'Frequency'] = dictionary_of_abstract_list[dictionary_element]
-			dictionary_counter = dictionary_counter+1
+    transfer_function_status_key = "Data transferred to pandas dataframe"
+    status_logger(status_logger_name, transfer_function_status_key)
 
-	transfer_function_status_key = "Copied data from"+" "+str(abstracts_txt_file_name)+" "+"to"+" "+"pandas dataframe"
-	status_logger(status_logger_name, transfer_function_status_key)
+    # Saving dataframe to csv file
+    dataframe_of_abstract_words.to_csv(abstracts_csv_file_name, index=False)
 
-	transfer_function_status_key = "Copying data from pandas dataframe to"+" "+str(abstracts_csv_file_name)
-	status_logger(status_logger_name, transfer_function_status_key)
+    transfer_function_status_key = "Dataframe saved to CSV"
+    status_logger(status_logger_name, transfer_function_status_key)
 
-	'''Saving dataframe to csv file, without the index column'''
-	dataframe_of_abstract_words.to_csv(abstracts_csv_file_name, index=False)
-
-	transfer_function_status_key = "Copied data from pandas dataframe to"+" "+str(abstracts_csv_file_name)
-	status_logger(status_logger_name, transfer_function_status_key)
+    return dataframe_of_abstract_words
 
 def analyzer_main(abstracts_log_name, status_logger_name):
 	'''Declaring the actual analyzer_main function is integrated to Bias.py code'''
