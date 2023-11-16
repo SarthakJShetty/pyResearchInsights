@@ -8,8 +8,12 @@ Purpose of this script:
 Clean the corpus of special character'''
 
 '''Importing the status logger function here to LOG the cleaner module working for debugging'''
+import spacy
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.cluster import KMeans
 from pyResearchInsights.common_functions import status_logger
 
+nlp = spacy.load("en_core_web_sm")
 '''This holds the elements of the abstract after it has been split at the spaces'''
 elements = []
 '''Holds the dirty elements that contain the \\ and // in them'''
@@ -99,7 +103,8 @@ def cleaned_abstract_dumper(abstract_directory, cleaned_texts, status_logger_nam
     status_logger(status_logger_name, cleaned_abstract_dumper_end_status_key)
 
     return new_cleaned_texts_folder
-    
+
+
 def cleaner_main(abstract_directory, status_logger_name):
     '''This module removes all the special characters from the abstract scrapped using the Bias tool.'''
     cleaner_main_start_status_key = "Entering the Cleaner module"
@@ -114,4 +119,18 @@ def cleaner_main(abstract_directory, status_logger_name):
     cleaner_main_end_status_key = "Exiting the Cleaner module"
     status_logger(status_logger_name, cleaner_main_end_status_key)
 
-    return cleaned_texts, new_cleaned_texts_folder
+    return cl
+    eaned_texts, new_cleaned_texts_folder
+
+def advanced_text_processing(text):
+    doc = nlp(text)
+    lemmatized_text = " ".join([token.lemma_ for token in doc if not token.is_stop])
+    entities = [(ent.text, ent.label_) for ent in doc.ents]
+    return lemmatized_text, entities
+
+def machine_learning_clustering(texts):
+    vectorizer = TfidfVectorizer(stop_words='english')
+    X = vectorizer.fit_transform(texts)
+    kmeans = KMeans(n_clusters=5)
+    kmeans.fit(X)
+    return kmeans.labels_
