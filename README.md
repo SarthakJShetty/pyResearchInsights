@@ -31,6 +31,11 @@ This project is a collaboration between <a title="Sarthak" href="https://Sarthak
 
 ## <a title='Installation' id='installation'>2.0 Installation</a>:
 
+:warning: **Note: `pyLDAvis` one of the dependencies of `pyResearchInsights`, depends on `sklearn`. `sklearn` has now been renamed to `scikit-learn`. To install the `pyResearchInsights`, set this environment variable and continue with the installation** :warning:
+
+```
+export SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
+```
 To install the package using ```pip```, use the command:
 
 ```bash
