@@ -4,8 +4,6 @@ Sarthak J. Shetty
 
 '''Adding the libraries to be used here.'''
 
-'''Importing urllib.request to use urlopen'''
-from urllib.request import build_opener, HTTPCookieProcessor
 ''''Importing urllib.error to handle errors in HTTP pinging.'''
 import urllib.error
 '''BeautifulSoup is used for souping.'''
@@ -20,6 +18,9 @@ import numpy as np
 import time
 '''Fragmenting code into different scripts. Some functions are to be used across the different sub-parts as well. Hence, shifted some of the functions to the new script.'''
 from pyResearchInsights.common_functions import pre_processing,  argument_formatter, keyword_url_generator, abstract_id_log_name_generator, status_logger
+'''Requests collects the HTML from the URL that is being pinged'''
+import requests
+
 
 def url_reader(url, status_logger_name):
 	'''This keyword is supplied to the URL and is hence used for souping.
@@ -28,10 +29,8 @@ def url_reader(url, status_logger_name):
 	moves on to the next PII number'''
 	try:
 		'''Using the urllib function, urlopen to extract the html_code of the given page'''
-		open_connection = build_opener(HTTPCookieProcessor())
-		html_code = open_connection.open(url)
-		'''Closing the abstract window after each abstract has been extracted'''
-		return html_code			
+		response = requests.get(url)
+		return response.content
 	except (UnboundLocalError, urllib.error.HTTPError):
 		pass
 
